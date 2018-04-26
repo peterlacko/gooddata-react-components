@@ -13,6 +13,8 @@ import escape = require('lodash/escape');
 import unescape = require('lodash/unescape');
 import isUndefined = require('lodash/isUndefined');
 import cloneDeep = require('lodash/cloneDeep');
+import uniq = require('lodash/uniq');
+
 import { IChartConfig, IChartLimits } from './Chart';
 import {
     getAttributeElementIdFromAttributeElementUri,
@@ -176,7 +178,7 @@ export function getColorPalette(
 
 ): string[] {
     if (isHeatMap(type)) {
-        return [];
+        return DEFAULT_COLOR_PALETTE;
     }
 
     if (isAttributeColorPalette(type, afm, stackByAttribute)) {
@@ -915,6 +917,36 @@ function assignYAxes(series: any, yAxes: IAxis[]) {
     return series;
 }
 
+function getHeatmapDataClasses(series: any = []) { // TODO: types
+    const newSeries = series.map((item: any) => ({
+        ...item,
+        borderWidth: 0
+    }));
+
+    const values = newSeries[0].data.map((item: any) => item.value);
+    const min = Math.min(...values);
+    const max = Math.max(...values);
+    const dataClasses = [];
+    const uniqValuesCount = uniq(values).length;
+    const categoriesCount = uniqValuesCount < 7 ? uniqValuesCount : 7;
+    const step = (max - min) / categoriesCount;
+    if (min === max) { // TODO: smarter dataClasses, rounded, etc
+        dataClasses.push({
+            from: min,
+            to: max
+        });
+    } else {
+        for (let i = min; i < max; i += step) { // TODO: remove forloop
+            dataClasses.push({
+                from: i,
+                to: i + step
+            });
+        }
+    }
+
+    return dataClasses;
+}
+
 /**
  * Creates an object providing data for all you need to render a chart except drillability.
  *
@@ -1093,7 +1125,10 @@ export function getChartOptions(
             grid: {
                 enabled: false
             },
-            colorPalette: [] as any
+            colorPalette,
+            colorAxis: {
+                dataClasses: getHeatmapDataClasses(series)
+            }
         };
     }
 

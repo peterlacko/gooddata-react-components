@@ -460,6 +460,7 @@ function getHeatMapDataConfiguration(chartOptions: any) {
         borderWidth: 0
     }));
     const categories = data.categories;
+    const dataClasses = get(chartOptions, 'colorAxis.dataClasses', []);
 
     return {
         series,
@@ -474,7 +475,18 @@ function getHeatMapDataConfiguration(chartOptions: any) {
                 enabled: !isEmpty(compact(categories))
             },
             categories: categories[1] || []
-        }]
+        }],
+        colorAxis: {
+            dataClasses: dataClasses.map((dataClass, index) => {
+                const { from, to } = dataClass;
+                return {
+                    from,
+                    to,
+                    color: chartOptions.colorPalette[index],
+                    name: formatLabel(index === dataClasses.length - 1 ? to : from, '#,##0') // TODO format properly
+                };
+            })
+        }
     };
 }
 

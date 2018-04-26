@@ -186,9 +186,9 @@ export default class HighChartsRenderer
         const { chartOptions, legend, height, legendRenderer } = this.props;
         const { items } = legend;
 
-        if (!legend.enabled) {
-            return null;
-        }
+        // if (!legend.enabled) {
+        //     return null;
+        // }
 
         let { type } = chartOptions;
         if (isPieOrDonutChart(type)) {

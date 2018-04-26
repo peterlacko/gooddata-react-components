@@ -24,13 +24,13 @@ const HEATMAP_TEMPLATE = {
         }
     },
     legend: {
-        enabled: true,
+        enabled: false,
         align: 'right',
-        layout: 'horizontal',
+        layout: 'vertical',
         margin: 0,
         verticalAlign: 'top',
-        y: -10,
-        symbolWidth: 392,
+        // y: -10,
+        symbolWidth: 10,
         symbolHeight: 10
     },
     series: [{
