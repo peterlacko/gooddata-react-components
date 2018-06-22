@@ -7,5 +7,6 @@ export interface IPushData {
     properties?: {
         sortItems?: AFM.SortItem[];
         totals?: VisualizationObject.IVisualizationTotal[];
+        isUserSorting?: boolean;
     };
 }

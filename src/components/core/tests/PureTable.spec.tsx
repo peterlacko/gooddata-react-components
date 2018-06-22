@@ -173,7 +173,8 @@ describe('PureTable', () => {
 
             expect(pushDataSpy).toHaveBeenCalledWith({
                 properties: {
-                    sortItems: [fakeSortItem]
+                    sortItems: [fakeSortItem],
+                    isUserSorting: true
                 }
             });
             expect(pushDataSpy.mock.calls.length).toBe(1);
@@ -197,7 +198,8 @@ describe('PureTable', () => {
 
             expect(pushDataSpy).toHaveBeenCalledWith({
                 properties: {
-                    sortItems: [fakeSortItem]
+                    sortItems: [fakeSortItem],
+                    isUserSorting: true
                 }
             });
             expect(pushDataSpy.mock.calls.length).toBe(1);

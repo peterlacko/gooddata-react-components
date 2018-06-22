@@ -95,7 +95,8 @@ class SimpleTable extends
     public onSortChange(sortItem: AFM.SortItem) {
         this.props.pushData({
             properties: {
-                sortItems: [sortItem]
+                sortItems: [sortItem],
+                isUserSorting: true
             }
         });
     }
