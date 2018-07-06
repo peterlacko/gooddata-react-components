@@ -244,6 +244,12 @@ export const customPalette = [
     '#001a98'
 ];
 
+export const heatMapMetricRowColumn: any = {
+    executionRequest: require('./heat_map_with_metric_row_column_request.json').execution,
+    executionResponse: require('./heat_map_with_metric_row_column_response.json').executionResponse,
+    executionResult: require('./heat_map_with_metric_row_column_result.json').executionResult
+};
+
 export default {
     barChartWithSingleMeasureAndNoAttributes,
     barChartWithoutAttributes,
@@ -265,5 +271,6 @@ export default {
     headlineWithTwoMeasures,
     comboWithTwoMeasuresAndViewByAttribute,
     comboWithTwoMeasuresAndViewByAttributeMdObject,
-    scatterWithNulls
+    scatterWithNulls,
+    heatMapMetricRowColumn
 };

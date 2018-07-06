@@ -1,0 +1,36 @@
+{
+  "execution": {
+    "afm": {
+      "measures": [{
+        "localIdentifier": "amountMetric",
+        "definition": {
+          "measure": {
+            "item": {
+              "uri": "/gdc/md/x3as28wrlaw18wc5jd7jt7924ge2o99x/obj/1279"
+            }
+          }
+        },
+        "alias": "Amount"
+      }],
+      "attributes": [{
+        "displayForm": {
+          "uri": "/gdc/md/x3as28wrlaw18wc5jd7jt7924ge2o99x/obj/952"
+        },
+        "localIdentifier": "productNameAttribute"
+      }, {
+        "displayForm": {
+          "uri": "/gdc/md/x3as28wrlaw18wc5jd7jt7924ge2o99x/obj/1805"
+        },
+        "localIdentifier": "stageNameAttribute"
+      }]
+    },
+    "resultSpec": {
+      "dimensions": [{
+        "itemIdentifiers": ["productNameAttribute"]
+      }, {
+        "itemIdentifiers": ["stageNameAttribute", "measureGroup"]
+      }],
+      "sorts": []
+    }
+  }
+}

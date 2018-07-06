@@ -187,6 +187,9 @@
   }, {
     "title": "Headline",
     "url": "local:headline"
+  }, {
+    "title": "Heatmap",
+    "url": "local:heatmap"
   }],
   "visualizationObjects": [
     {

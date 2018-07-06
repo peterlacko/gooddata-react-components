@@ -882,7 +882,7 @@ function getYAxes(config: IChartConfig, measureGroup: Execution.IMeasureGroupHea
         }
     } else if (isHeatMap(type)) {
         yAxes = [{
-            label: stackByAttribute ? stackByAttribute.name : '',
+            label: stackByAttribute ? stackByAttribute.formOf.name : '',
             format: firstMeasureGroupItem.format
         }];
     } else {

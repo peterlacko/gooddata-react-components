@@ -9,11 +9,13 @@ const HEATMAP_TEMPLATE = {
     colorAxis: {
         tickColor: 'rgb(255,255,255)',
         stops: [
-            [0, 'rgb(254,254,255)'],
-            [0.25, 'rgb(193,236,248)'],
-            [0.5, 'rgb(139,220,244)'],
-            [0.75, 'rgb(109,209,230)'],
-            [1, 'rgb(20,178,226)']
+            [0, 'rgb(255, 255, 255)'],
+            [1 / 6, 'rgb(197, 236, 248)'],
+            [2 / 6, 'rgb(138, 217, 241)'],
+            [0.5, 'rgb(79, 198, 234)'],
+            [4 / 6, 'rgb(20, 178, 226)'],
+            [5 / 6, 'rgb(22, 151, 192)'],
+            [1, 'rgb(0, 110, 145)']
         ]
     },
     plotOptions: {
@@ -28,7 +30,7 @@ const HEATMAP_TEMPLATE = {
         margin: 0,
         verticalAlign: 'top',
         y: -10,
-        symbolWidth: 280,
+        symbolWidth: 392,
         symbolHeight: 10
     },
     series: [{

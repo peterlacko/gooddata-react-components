@@ -185,4 +185,22 @@ describe('highChartCreators', () => {
             expect(config).toHaveProperty('series.1.cursor', 'pointer');
         });
     });
+
+    describe('Heat Map configuration', () => {
+
+        it('contains color range and borderWidth is 0 for every series data', () => {
+            const config = getHighchartsOptions({
+                ...chartOptions,
+                type: VisualizationTypes.HEATMAP,
+                data: {
+                    ...chartOptions.data,
+                    categories: []
+                }
+            }, {});
+            expect(config).toHaveProperty('colorAxis');
+            expect(config).toHaveProperty('plotOptions.heatmap');
+            expect(config.series[0].borderWidth).toBe(0);
+            expect(config.colorAxis.stops.length).toBe(7);
+        });
+    });
 });

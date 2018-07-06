@@ -455,7 +455,10 @@ function getSeries(series: any, colorPalette: any = []) {
 
 function getHeatMapDataConfiguration(chartOptions: any) {
     const data = chartOptions.data || EMPTY_DATA;
-    const series = data.series;
+    const series = data.series.map((item: any) => ({
+        ...item,
+        borderWidth: 0
+    }));
     const categories = data.categories;
 
     return {

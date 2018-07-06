@@ -1,0 +1,48 @@
+{
+  "executionResponse": {
+    "dimensions": [{
+      "headers": [{
+        "attributeHeader": {
+          "name": "Product Name",
+          "localIdentifier": "productNameAttribute",
+          "uri": "/gdc/md/x3as28wrlaw18wc5jd7jt7924ge2o99x/obj/952",
+          "identifier": "label.product.id.name",
+          "formOf": {
+            "name": "Product",
+            "uri": "/gdc/md/x3as28wrlaw18wc5jd7jt7924ge2o99x/obj/949",
+            "identifier": "attr.product.id"
+          }
+        }
+      }]
+    }, {
+      "headers": [{
+        "attributeHeader": {
+          "name": "Stage Name",
+          "localIdentifier": "stageNameAttribute",
+          "uri": "/gdc/md/x3as28wrlaw18wc5jd7jt7924ge2o99x/obj/1805",
+          "identifier": "label.stage.name.stagename",
+          "formOf": {
+            "name": "Stage Name",
+            "uri": "/gdc/md/x3as28wrlaw18wc5jd7jt7924ge2o99x/obj/1095",
+            "identifier": "attr.stage.name"
+          }
+        }
+      }, {
+        "measureGroupHeader": {
+          "items": [{
+            "measureHeaderItem": {
+              "name": "Amount",
+              "format": "$#,##0.00",
+              "localIdentifier": "amountMetric",
+              "uri": "/gdc/md/x3as28wrlaw18wc5jd7jt7924ge2o99x/obj/1279",
+              "identifier": "ah1EuQxwaCqs"
+            }
+          }]
+        }
+      }]
+    }],
+    "links": {
+      "executionResult": "/gdc/app/projects/x3as28wrlaw18wc5jd7jt7924ge2o99x/executionResults/2465301621059091968?q=eAGlkk1vwjAMhv9KFXasaOnoaJCmicM2cZmmbZxQD6ExVVHSoHyoINT%2FPoeqgLYTcKkSp379%2BLUP%0ARMNWafvBJJApWdS2sgI4CUmhhJO1IdPlgfDKbAXbvykt5xx%2Fi0peRJJHu0dmkqzRgjWjrCnSDZ9s%0A7IQm4xISRekuUqtNNMriFPVWzMCrAAm1XXzNrxaJaRpBl25eKv6MisxaXa2chRuYUA4VDHZOptjf%0A2n%2Bdrq7GyuIn0rao5KRkeo%2F5l2A%2F3kyMfVtWQnD0OCRHh%2F8FlWXCm73Mc5STgK0V71q5Lcn7azeL%0ANQ6BITV5GISDQTyMY9%2FIqfwswHOg1gETIuCAomGgoWSaCzDGP5gjjNL%2BYJ0ZYnqPNJPK1RYDXf0b%0AfE0mlLRIrFXT4Z6G1HvxqRV3hS9yhsbLXStG0wQl7tswOqZ%2FF6y35Yx86uZ6a1AfGe3lnPP2Fy5U%0AI%2BA%3D%0A&c=76956ebc74ba4f97333d44ab809525c2&offset=0%2C0&limit=1000%2C1000&dimensions=2&totals=0%2C0"
+    }
+  }
+}

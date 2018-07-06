@@ -182,6 +182,18 @@ describe('getCustomizedConfiguration', () => {
         expect(result.plotOptions.series.connectNulls).toBeUndefined();
     });
 
+    it('should set borderWidth to 0 for every series data of heatmap', () => {
+        const result = getCustomizedConfiguration({
+            ...chartOptions,
+            type: 'heatmap',
+            data: {
+                ...chartOptions.data,
+                categories: []
+            }
+        });
+        expect(result.series[0].borderWidth).toBe(0);
+    });
+
     describe('tooltip followPointer', () => {
         it ('should follow pointer for bar chart when data max is above axis max', () => {
             const result = getCustomizedConfiguration({
