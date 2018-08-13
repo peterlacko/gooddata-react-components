@@ -100,8 +100,6 @@ export default function getLegend(legendConfig: any = {}, chartOptions: any) {
         if (isBubbleChart(chartOptions.type)) {
             set(defaultLegendConfigByType, 'enabled', true);
         }
-    } else if (isHeatMap(chartOptions.type)) {
-        set(legendConfig, 'position', 'top');
     }
 
     const baseConfig = {

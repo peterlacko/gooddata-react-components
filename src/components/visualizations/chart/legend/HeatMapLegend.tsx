@@ -8,12 +8,14 @@ import {
     IHeatmapLegendLabel,
     getHeatMapLegendConfiguration
 } from './helpers';
+import { TOP, BOTTOM } from './PositionTypes';
 
 export interface IHeatMapLegendProps {
     series: IHeatMapLegendSerie[];
     isSmall: boolean;
     format?: string;
     numericSymbols: string[];
+    position: string;
 }
 
 function HeatMapLabels(labels: IHeatmapLegendLabel[]) {
@@ -21,12 +23,12 @@ function HeatMapLabels(labels: IHeatmapLegendLabel[]) {
         <div className="labels">
             {labels.map((item: IHeatmapLegendLabel) => {
                 return (
-                        <span
-                            className={item.class}
-                            key={item.key}
-                        >
-                            {item.label}
-                        </span>
+                    <span
+                        className={item.class}
+                        key={item.key}
+                    >
+                        {item.label}
+                    </span>
                 );
             })}
         </div>
@@ -49,15 +51,20 @@ function HeatMapBoxes(boxes: IHeatMapLegendBox[]) {
 
 export default class HeatMapLegend extends React.PureComponent<IHeatMapLegendProps> {
     public render() {
-        const { series, format, numericSymbols, isSmall } = this.props;
+        const { series, format, numericSymbols, isSmall, position } = this.props;
 
-        const config: IHeatMapLegendConfig = getHeatMapLegendConfiguration(series, format, numericSymbols, isSmall);
+        const config: IHeatMapLegendConfig = getHeatMapLegendConfiguration(
+            series, format, numericSymbols, isSmall, position
+        );
         const classes = classNames(...config.classes);
+
+        const renderLabelsFirst = config.position === TOP || config.position === BOTTOM;
 
         return (
             <div className={classes}>
-                {HeatMapLabels(config.labels)}
+                {renderLabelsFirst && HeatMapLabels(config.labels)}
                 {HeatMapBoxes(config.boxes)}
+                {!renderLabelsFirst && HeatMapLabels(config.labels)}
             </div>
         );
     }

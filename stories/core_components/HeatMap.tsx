@@ -102,4 +102,20 @@ storiesOf('Core components/HeatMap', module)
                 />
             </div>
         )
+    ))
+    .add('with legend on top', () => (
+        screenshotWrap(
+            <div style={wrapperStyle}>
+                <HeatMap
+                    projectId="storybook"
+                    measures={[MEASURE_1]}
+                    segmentBy={ATTRIBUTE_1}
+                    trendBy={ATTRIBUTE_2}
+                    config={{ legend: { position: 'top' } }}
+                    onError={onErrorHandler}
+                    LoadingComponent={null}
+                    ErrorComponent={null}
+                />
+            </div>
+        )
     ));
