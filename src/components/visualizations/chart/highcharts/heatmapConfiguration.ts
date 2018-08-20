@@ -10,15 +10,20 @@ const HEATMAP_TEMPLATE = {
         spacingRight: 0
     },
     defs: {
-        patterns: [{
+        emptyDataPattern: {
+            tagName: 'pattern',
             id: 'empty-data-pattern',
-            path: {
+            patternUnits: 'userSpaceOnUse',
+            width: 4,
+            height: 4,
+            children: [{
+                tagName: 'path',
                 d: 'M 10 0 L 0 10 M 9 11 L 11 9 M 4 11 L 11 4 M -1 1 L 1 -1 M -1 6 L 6 -1',
                 stroke: GRAY,
                 strokeWidth: 1,
                 fill: WHITE
-            }
-        }]
+            }]
+        }
     },
     plotOptions: {
         heatmap: {

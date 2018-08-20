@@ -4,6 +4,9 @@ import * as invariant from 'invariant';
 import { AFM, Execution, VisualizationObject } from '@gooddata/typings';
 import * as Highcharts from 'highcharts';
 
+import HighchartsPatternFill = require('highcharts/modules/pattern-fill');
+HighchartsPatternFill(Highcharts);
+
 import range = require('lodash/range');
 import get = require('lodash/get');
 import isEqual = require('lodash/isEqual');
@@ -429,9 +432,21 @@ export function getHeatmapSeries(
     stackByAttribute: any
 ) {
     const data = [] as any;
+
     executionResultData.forEach((rowItem: any, rowItemIndex: number) => {
         rowItem.forEach((columnItem: any, columnItemIndex: number) => {
-            data.push({ x: columnItemIndex, y: rowItemIndex, value: parseValue(columnItem) });
+            const parsedValue = parseValue(columnItem);
+
+            data.push({
+                x: columnItemIndex,
+                y: rowItemIndex,
+                value: parsedValue,
+                color: !parsedValue && {
+                    pattern: {
+                       color: 'url(#highcharts-default-pattern-0)'
+                    }
+                }
+             });
         });
     });
 

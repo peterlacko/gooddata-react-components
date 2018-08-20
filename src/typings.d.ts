@@ -71,3 +71,5 @@ declare module '@gooddata/goodstrap/lib/Bubble/BubbleHoverTrigger' {
 
     }
 }
+
+declare module 'highcharts/modules/pattern-fill';
