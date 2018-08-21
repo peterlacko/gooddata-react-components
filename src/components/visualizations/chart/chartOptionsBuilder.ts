@@ -443,7 +443,14 @@ export function getHeatmapSeries(
                 value: parsedValue,
                 color: !parsedValue && {
                     pattern: {
-                       color: 'url(#highcharts-default-pattern-0)'
+                        path: {
+                            d: 'M 10 0 L 0 10 M 9 11 L 11 9 M 4 11 L 11 4 M -1 1 L 1 -1 M -1 6 L 6 -1',
+                            stroke: 'rgb(201, 213, 223)',
+                            strokeWidth: 1
+                        },
+                        width: 10,
+                        height: 10,
+                        fill: 'rgb(255, 255, 255)'
                     }
                 }
              });

@@ -1,6 +1,6 @@
 // (C) 2007-2018 GoodData Corporation
 
-import { WHITE, GRAY } from '../../../utils/color';
+// import { WHITE, GRAY } from '../../../utils/color';
 
 export function renderHeatmapCells(Highcharts: any) {
     const wrap = Highcharts.wrap;
@@ -59,12 +59,12 @@ export function renderHeatmapCells(Highcharts: any) {
                     if (isNullValue) {
                         const canPadding = point.shapeArgs.width > 4 && point.shapeArgs.height > 4;
 
-                        pointAttr = {
-                            ...pointAttr,
-                            'fill': WHITE,
-                            'stroke-width': 1,
-                            'stroke': GRAY
-                        };
+                        // pointAttr = {
+                        //     ...pointAttr,
+                        //     'fill': WHITE,
+                        //     'stroke-width': 1,
+                        //     'stroke': GRAY
+                        // };
                         renderShape(point, borderAttr, true);
 
                         if (canPadding) {
@@ -75,11 +75,11 @@ export function renderHeatmapCells(Highcharts: any) {
                                 height: point.shapeArgs.height - 4
                             };
                         }
-                        pointAttr = {
-                            ...pointAttr,
-                            'fill': 'url(#empty-data-pattern)',
-                            'stroke-width': 0
-                        };
+                        // pointAttr = {
+                        //     ...pointAttr,
+                        //     'fill': 'url(#empty-data-pattern)',
+                        //     'stroke-width': 0
+                        // };
                         renderShape(point, borderAttr, false);
                     } else {
                         renderShape(point, borderAttr, false);
