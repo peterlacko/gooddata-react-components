@@ -181,15 +181,35 @@ function getNormalHeatmapLabels(legendLabels: string[]): IHeatmapLegendLabel[] {
     }, []);
 }
 
-const DEFAULT_LABEL_LENGTH = 4;
-const SMALL_LABEL_LENGTH = 3;
+const LABEL_LENGHT_THRESHOLDS = [4, 7];
+const SMALL_LABEL_LENGHT_THRESHOLDS = [3, 6];
 
-function shouldShortenHeatmapLabels(legendLabels: string[], isSmall: boolean) {
+function getLabelsShorteningConfig(legendLabels: string[], isSmall: boolean, position: string) {
     const firstLabelLength = head(legendLabels).length;
     const lastLabelLength = last(legendLabels).length;
-    const maxLabelLength = isSmall ? SMALL_LABEL_LENGTH : DEFAULT_LABEL_LENGTH;
+    const maxLabelLength = firstLabelLength > lastLabelLength ? firstLabelLength : lastLabelLength;
 
-    return firstLabelLength > maxLabelLength || lastLabelLength > maxLabelLength;
+    const thresholds = isSmall ? SMALL_LABEL_LENGHT_THRESHOLDS : LABEL_LENGHT_THRESHOLDS;
+    let shortenClass;
+    let shouldShorten;
+
+    if (maxLabelLength <= thresholds[0]) {
+        shortenClass = '';
+        shouldShorten = false;
+    } else if (maxLabelLength > thresholds[0] && maxLabelLength <= thresholds[1]) {
+        shortenClass = 'shortened-medium';
+        shouldShorten = true;
+    } else {
+        shortenClass = 'shortened-full';
+        shouldShorten = true;
+    }
+
+    shortenClass = position === TOP || position === BOTTOM ? shortenClass : '';
+
+    return {
+        shortenClass,
+        shouldShorten
+    };
 }
 
 const MIDDLE_LEGEND_BOX_INDEX = 3;
@@ -227,13 +247,11 @@ export function getHeatmapLegendConfiguration(
         finalPosition = position || RIGHT;
     }
 
-    const shouldShorten = finalPosition === TOP || finalPosition === BOTTOM
-        ? shouldShortenHeatmapLabels(legendLabels, isSmall) : false;
-    const shortened = shouldShorten ? 'shortened' : null;
-    const classes = ['viz-legend', 'heatmap-legend', `position-${finalPosition}`, small, shortened];
+    const shorteningConfig = getLabelsShorteningConfig(legendLabels, isSmall, finalPosition);
+    const classes = ['viz-legend', 'heatmap-legend', `position-${finalPosition}`, small, shorteningConfig.shortenClass];
 
     // legend has *always* 7 boxes, 8 numeric labels when labels fit, 4 otherwise
-    const finalLabels = shouldShorten
+    const finalLabels = shorteningConfig.shouldShorten
         ? getShortenedHeatmapLabels(legendLabels) : getNormalHeatmapLabels(legendLabels);
 
     const boxes = getHeatmapBoxes(series);

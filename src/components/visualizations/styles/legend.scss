@@ -279,7 +279,7 @@ $responsive-legend: 'only screen and (max-width: 767px)';
         }
 
 
-        &.shortened {
+        &.shortened-medium {
             .labels {
                 .left {
                     width: 45px;
@@ -314,6 +314,46 @@ $responsive-legend: 'only screen and (max-width: 767px)';
                     }
                     .dots {
                         width: 10px;
+                    }
+                }
+            }
+        }
+
+        &.shortened-full {
+            .labels {
+                .left {
+                    width: 175px;
+                }
+                .right {
+                    width: 175px;
+                }
+                .center-empty {
+                    display: none;
+                }
+                .middle {
+                    display: none;
+                }
+                .dots {
+                    display: none;
+                }
+            }
+
+            &.small {
+                .labels {
+                    .left {
+                        width: 138px;
+                    }
+                    .right {
+                        width: 138px;
+                    }
+                    .center-empty {
+                        display: none;
+                    }
+                    .middle {
+                        display: none;
+                    }
+                    .dots {
+                        display: none;
                     }
                 }
             }
