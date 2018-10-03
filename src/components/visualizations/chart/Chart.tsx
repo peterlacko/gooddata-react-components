@@ -73,6 +73,19 @@ export interface IChartProps {
     callback(): void;
 }
 
+export interface IColorPaletteItem {
+    guid: string;
+    fill: {
+        r: number;
+        g: number;
+        b: number;
+    };
+}
+
+export interface IColorPalette {
+    [index: number]: IColorPaletteItem;
+}
+
 export default class Chart extends React.Component<IChartProps> {
     public static defaultProps: Partial<IChartProps> = {
         callback: noop,
