@@ -1,10 +1,12 @@
 // (C) 2007-2018 GoodData Corporation
+import { IColorPalette } from '../chart/Chart';
+
 export const WHITE = 'rgb(255, 255, 255)';
 export const BLACK = 'rgb(0, 0, 0)';
 export const GRAY = 'rgb(201, 213, 223)';
 export const AXIS_LINE_COLOR = '#d5d5d5';
 
-export const DEFAULT_COLOR_PALETTE = [
+export const DEFAULT_COLOR_PALETTE = [ // TODO: rewrite to actual color palette
     'rgb(20,178,226)',
     'rgb(0,193,141)',
     'rgb(229,77,66)',
@@ -78,4 +80,24 @@ export function normalizeColorToRGB(color: string) {
     return color.replace(hexPattern, (_prefix: string, r: string, g: string, b: string) => {
         return `rgb(${[r, g, b].map(value => (parseInt(value, 16).toString(10))).join(', ')})`;
     });
+}
+
+export function getColorPaletteFromColors(colors: string[]): IColorPalette {
+    try {
+        return colors.map((color: string) => {
+            const match = color.match(/^rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)$/i);
+            if (match) {
+                return {
+                    guid: String(uuid.v4()),
+                    fill: {
+                        r: Number(match[1]),
+                        g: Number(match[2]),
+                        b: Number(match[3])
+                    }
+                };
+            }
+        });
+    } catch (_ignored) {
+        return ACTUAL_DEFAULT_COLOR_PALETTE;
+    }
 }
