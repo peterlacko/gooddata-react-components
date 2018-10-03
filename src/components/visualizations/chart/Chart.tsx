@@ -41,6 +41,7 @@ export interface IChartLimits {
 
 export interface IChartConfig {
     colors?: string[];
+    colorPalette?: IColorPalette;
     type?: VisType;
     legend?: ILegendConfig;
     legendLayout?: string;
