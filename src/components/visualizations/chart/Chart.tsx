@@ -85,6 +85,7 @@ export interface IColorPaletteItem {
 
 export interface IColorPalette {
     [index: number]: IColorPaletteItem;
+    length: number;
 }
 
 export default class Chart extends React.Component<IChartProps> {
