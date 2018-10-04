@@ -188,17 +188,15 @@ export function normalizeColorToRGB(color: string) {
 export function getColorPaletteFromColors(colors: string[]): IColorPalette {
     try {
         return colors.map((color: string, index: number) => {
-            const match = color.match(/^rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)$/i);
-            if (match) {
-                return {
-                    guid: String(index),
-                    fill: {
-                        r: Number(match[1]),
-                        g: Number(match[2]),
-                        b: Number(match[3])
-                    }
-                };
-            }
+            const { R, G, B } = parseRGBColorCode(normalizeColorToRGB(color));
+            return {
+                guid: String(index),
+                fill: {
+                    r: R,
+                    g: G,
+                    b: B
+                }
+            };
         });
     } catch (_ignored) {
         return DEFAULT_COLOR_PALETTE;

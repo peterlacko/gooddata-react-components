@@ -111,6 +111,22 @@ storiesOf('Core components/Treemap', module)
             </div>
         )
     ))
+    .add('custom colors by hexa', () => (
+        screenshotWrap(
+            <div style={wrapperStyle}>
+                <Treemap
+                    projectId="storybook"
+                    measures={[MEASURE_1]}
+                    viewBy={ATTRIBUTE_1}
+                    segmentBy={ATTRIBUTE_2}
+                    onError={onErrorHandler}
+                    config={{
+                        colors: ['#ff0000', '#00ff00', '#0000ff']
+                    }}
+                />
+            </div>
+        )
+    ))
     .add('with German number format', () => (
         screenshotWrap(
             <div style={wrapperStyle}>
