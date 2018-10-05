@@ -1,7 +1,6 @@
 // (C) 2007-2018 GoodData Corporation
 import * as React from 'react';
 import noop = require('lodash/noop');
-import isEmpty = require('lodash/isEmpty');
 
 import { Visualization } from '../../visualizations/Visualization';
 import { IChartConfig } from '../../visualizations/chart/Chart';
@@ -23,7 +22,7 @@ import {
 import { ChartPropTypes, Requireable } from '../../../proptypes/Chart';
 import { BaseVisualization } from './BaseVisualization';
 import { OnLegendReady } from '../../../interfaces/Events';
-import { DEFAULT_COLOR_PALETTE, getColorPaletteFromColors } from '../../visualizations/utils/color';
+import { getValidColorPalette } from '../../visualizations/utils/color';
 export { Requireable };
 
 export interface ICommonChartProps extends ICommonVisualizationProps {
@@ -63,9 +62,7 @@ export class StatelessBaseChart extends BaseVisualization<IBaseChartProps & ILoa
             pushData
         } = this.props;
 
-        const colorPalette = isEmpty(config.colorPalette) ?
-            (isEmpty(config.colors) ? DEFAULT_COLOR_PALETTE : getColorPaletteFromColors(config.colors))
-            : config.colorPalette;
+        const colorPalette = getValidColorPalette(config);
 
         const fullConfig = { ...config, type, colorPalette };
 
