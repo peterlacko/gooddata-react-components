@@ -5,7 +5,7 @@ import { screenshotWrap } from '@gooddata/test-storybook';
 
 import { ComboChart } from '../../src/index';
 import { onErrorHandler } from '../mocks';
-import { CUSTOM_COLORS } from '../data/colors';
+import { CUSTOM_COLOR_PALETTE } from '../data/colors';
 import { ATTRIBUTE_1,
     MEASURE_1,
     MEASURE_2,
@@ -43,7 +43,7 @@ storiesOf('Core components/ComboChart', module)
                     onError={onErrorHandler}
                     LoadingComponent={null}
                     ErrorComponent={null}
-                    config={{ colors: CUSTOM_COLORS }}
+                    config={{ colorPalette: CUSTOM_COLOR_PALETTE }}
                 />
             </div>
         )
