@@ -39,9 +39,31 @@ export interface IChartLimits {
     dataPoints?: number;
 }
 
+export interface IPaletteColor {
+    type: string;
+    value: string;
+}
+
+export interface IRGBColor {
+    r: number;
+    g: number;
+    b: number;
+}
+
+export interface IRGBMapColor {
+    type: string;
+    value: IRGBColor;
+}
+
+export interface IColorMap {
+    id: string; // title for attribute element or identifier for measure
+    color: IPaletteColor | IRGBMapColor;
+}
+
 export interface IChartConfig {
     colors?: string[];
     colorPalette?: IColorPalette;
+    colorMapping?: IColorMap[];
     type?: VisType;
     legend?: ILegendConfig;
     legendLayout?: string;
@@ -76,16 +98,15 @@ export interface IChartProps {
 
 export interface IColorPaletteItem {
     guid: string;
-    fill: {
-        r: number;
-        g: number;
-        b: number;
-    };
+    fill: IRGBColor;
 }
+
+type IFind = (item: IColorPaletteItem) => boolean;
 
 export interface IColorPalette {
     [index: number]: IColorPaletteItem;
     length: number;
+    find(fun: IFind): IColorPaletteItem;
 }
 
 export default class Chart extends React.Component<IChartProps> {

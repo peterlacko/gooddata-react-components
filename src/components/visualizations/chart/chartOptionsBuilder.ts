@@ -55,7 +55,7 @@ import {
 import { getComboChartOptions } from './chartOptions/comboChartOptions';
 import { IDrillableItem } from '../../../interfaces/DrillEvents';
 
-import { ColorFactory, IColorStrategy } from './colorFactory';
+import { ColorFactory, IColorStrategy, IColorFullMapItem } from './colorFactory';
 
 const enableAreaChartStacking = (stacking: any) => {
     return stacking || isUndefined(stacking);
@@ -127,6 +127,7 @@ export interface IChartOptions {
     yAxisProps?: any;
     title?: any;
     colorAxis?: Highcharts.ColorAxisOptions;
+    colorMapping?: IColorFullMapItem[];
 }
 
 export function isNegativeValueIncluded(series: ISeriesItem[]) {
@@ -1384,6 +1385,7 @@ export function getChartOptions(
 
     const colorStrategy = ColorFactory.getColorStrategy(
         config.colorPalette,
+        config.colorMapping,
         measureGroup,
         viewByAttribute,
         stackByAttribute,
@@ -1432,8 +1434,9 @@ export function getChartOptions(
             indexSortOrder.push(dataPoint.legendIndex);
             return {
                 // after sorting, colors need to be reassigned in original order and legendIndex needs to be reset
+                // but when color mapping is present, we do not reassign color
                 ...dataPoint,
-                color: get(dataPoints[dataPoint.legendIndex], 'color'),
+                color: get(dataPoints[dataPointIndex], 'color'),
                 legendIndex: dataPointIndex
             };
         });
@@ -1601,7 +1604,8 @@ export function getChartOptions(
             enabled: gridEnabled
         },
         xAxisProps,
-        yAxisProps
+        yAxisProps,
+        colorMapping: colorStrategy.getColorMapping()
     };
 
     return chartOptions;
