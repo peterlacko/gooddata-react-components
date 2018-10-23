@@ -1384,6 +1384,7 @@ export function getChartOptions(
 
     const colorStrategy = ColorFactory.getColorStrategy(
         config.colorPalette,
+        config.colorMapping,
         measureGroup,
         viewByAttribute,
         stackByAttribute,

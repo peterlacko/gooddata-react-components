@@ -23,7 +23,7 @@ import {
     isDerivedMeasure,
     findParentMeasureIndex
 } from './chartOptionsBuilder';
-import { IColorPalette, IColorPaletteItem } from './Chart';
+import { IColorPalette, IColorPaletteItem, IColorMap, IRGBColor } from './Chart';
 
 export interface IColorStrategy {
     getColorByIndex(index: number): string;
@@ -42,6 +42,7 @@ export abstract class ColorStrategy implements IColorStrategy {
     protected palette: HighChartColorPalette;
     constructor(
         colorPalette: IColorPalette,
+        colorMapping: IColorMap[],
         measureGroup: MeasureGroupType,
         viewByAttribute: any,
         stackByAttribute: any,
@@ -49,6 +50,7 @@ export abstract class ColorStrategy implements IColorStrategy {
     ) {
         this.palette = this.createPalette(
             colorPalette,
+            colorMapping,
             measureGroup,
             viewByAttribute,
             stackByAttribute,
@@ -61,6 +63,7 @@ export abstract class ColorStrategy implements IColorStrategy {
 
     protected abstract createPalette(
         colorPalette: IColorPalette,
+        colorMapping: IColorMap[],
         measureGroup: MeasureGroupType,
         viewByAttribute: any,
         stackByAttribute: any,
@@ -69,23 +72,54 @@ export abstract class ColorStrategy implements IColorStrategy {
 }
 const emptyColorPaletteItem = { guid: 'none', fill: { r: 0, g: 0, b: 0 } };
 
+function getColorFromMapping(itemId: string, colorPalette: IColorPalette, colorMapping: IColorMap[]
+    ): IColorPaletteItem {
+        if (!colorMapping) {
+            return undefined;
+        }
+
+        const colorMap = colorMapping.find(item => item.id === itemId);
+        if (colorMap === undefined) {
+            return undefined;
+        }
+
+        if (colorMap.color.type === 'guid') {
+            return colorPalette.find(colorPaletteItem => colorPaletteItem.guid === colorMap.color.value);
+        } else {
+            return {
+                guid: String(Math.floor(Math.random() * 10000)),
+                fill: colorMap.color.value as IRGBColor
+            };
+        }
+}
+
 export class MeasureColorStrategy extends ColorStrategy {
     protected createPalette(
         colorPalette: IColorPalette,
+        colorMapping: IColorMap[],
         measureGroup: MeasureGroupType,
         _viewByAttribute: any,
         _stackByAttribute: any,
         afm: AFM.IAfm
     ): HighChartColorPalette {
-        let parentMeasuresCounter = 0;
+        let currentColorPaletteIndex = 0;
 
         const paletteMeasures = range(measureGroup.items.length).map((measureItemIndex) => {
             if (isDerivedMeasure(measureGroup.items[measureItemIndex], afm)) {
                 return emptyColorPaletteItem;
             }
-            const colorIndex = parentMeasuresCounter % colorPalette.length;
-            parentMeasuresCounter++;
-            return colorPalette[colorIndex];
+
+            const itemId = measureGroup.items[measureItemIndex].measureHeaderItem.localIdentifier;
+            const mappedColor = getColorFromMapping(itemId, colorPalette, colorMapping);
+
+            let color;
+            if (mappedColor) {
+                color = mappedColor;
+            } else {
+                color = colorPalette[currentColorPaletteIndex % colorPalette.length];
+                currentColorPaletteIndex++;
+            }
+            return color;
         });
 
         return paletteMeasures.map((color, measureItemIndex) => {
@@ -105,13 +139,29 @@ export class MeasureColorStrategy extends ColorStrategy {
 export class AttributeColorStrategy extends ColorStrategy {
     protected createPalette(
         colorPalette: IColorPalette,
+        colorMapping: IColorMap[],
         _measureGroup: MeasureGroupType,
         viewByAttribute: any,
         stackByAttribute: any,
         _afm: AFM.IAfm
     ): HighChartColorPalette {
-        const itemsCount = stackByAttribute ? stackByAttribute.items.length : viewByAttribute.items.length;
-        return range(itemsCount).map(itemIndex => getRgbString(colorPalette[itemIndex % colorPalette.length]));
+        const attributeItems = stackByAttribute ? stackByAttribute.items : viewByAttribute.items;
+        const itemsCount = attributeItems.length;
+        let currentColorPaletteIndex = 0;
+        return range(itemsCount).map((itemIndex) => {
+            const itemId = attributeItems[itemIndex].attributeHeaderItem.name;
+            const mappedColor = getColorFromMapping(itemId, colorPalette, colorMapping);
+
+            let color;
+            if (mappedColor) {
+                color = mappedColor;
+            } else {
+                color = colorPalette[currentColorPaletteIndex % colorPalette.length];
+                currentColorPaletteIndex++;
+            }
+
+            return getRgbString(color);
+        });
     }
 }
 
@@ -122,6 +172,7 @@ export class HeatMapColorStrategy extends ColorStrategy {
 
     protected createPalette(
         colorPalette: IColorPalette,
+        _colorMapping: IColorMap[],
         _measureGroup: MeasureGroupType,
         _viewByAttribute: any,
         _stackByAttribute: any,
@@ -161,6 +212,7 @@ export class HeatMapColorStrategy extends ColorStrategy {
 export class TreeMapColorStrategy extends MeasureColorStrategy {
     protected createPalette(
         colorPalette: IColorPalette,
+        _colorMapping: IColorMap[],
         measureGroup: MeasureGroupType,
         viewByAttribute: any,
         stackByAttribute: any,
@@ -172,6 +224,7 @@ export class TreeMapColorStrategy extends MeasureColorStrategy {
         }
         return super.createPalette(
             colorPalette,
+            _colorMapping,
             measureGroup,
             viewByAttribute,
             stackByAttribute,
@@ -188,6 +241,7 @@ export function isAttributeColorPalette(type: string, afm: AFM.IAfm, stackByAttr
 export class ColorFactory {
     public static getColorStrategy(
         colorPalette: IColorPalette = DEFAULT_COLOR_PALETTE,
+        colorMapping: IColorMap[],
         measureGroup: MeasureGroupType,
         viewByAttribute: any,
         stackByAttribute: any,
@@ -198,6 +252,7 @@ export class ColorFactory {
         if (isHeatmap(type)) {
             return new HeatMapColorStrategy(
                 colorPalette,
+                colorMapping,
                 measureGroup,
                 viewByAttribute,
                 stackByAttribute,
@@ -207,6 +262,7 @@ export class ColorFactory {
         if (isTreemap(type)) {
             return new TreeMapColorStrategy(
                 colorPalette,
+                colorMapping,
                 measureGroup,
                 viewByAttribute,
                 stackByAttribute,
@@ -216,6 +272,7 @@ export class ColorFactory {
         if (isAttributeColorPalette(type, afm, stackByAttribute)) {
             return new AttributeColorStrategy(
                 colorPalette,
+                colorMapping,
                 measureGroup,
                 viewByAttribute,
                 stackByAttribute,
@@ -224,6 +281,7 @@ export class ColorFactory {
 
         return new MeasureColorStrategy(
             colorPalette,
+            colorMapping,
             measureGroup,
             viewByAttribute,
             stackByAttribute,

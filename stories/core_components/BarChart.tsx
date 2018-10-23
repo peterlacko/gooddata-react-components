@@ -15,7 +15,8 @@ import {
     ATTRIBUTE_1_SORT_ITEM,
     MEASURE_2_SORT_ITEM,
     ARITHMETIC_MEASURE_SIMPLE_OPERANDS,
-    ARITHMETIC_MEASURE_USING_ARITHMETIC
+    ARITHMETIC_MEASURE_USING_ARITHMETIC,
+    MEASURE_1_POP
 } from '../data/componentProps';
 import { GERMAN_SEPARATORS } from '../data/numberFormat';
 import { CUSTOM_COLOR_PALETTE_CONFIG } from '../data/configProps';
@@ -323,4 +324,85 @@ storiesOf('Core components/BarChart', module)
                 />
             </div>
         )
+    ))
+    .add('one measure, one attribute, with color mapping', () => (
+        <div style={wrapperStyle}>
+            <BarChart
+                projectId="storybook"
+                measures={[MEASURE_1, MEASURE_2, MEASURE_1_POP]}
+                viewBy={ATTRIBUTE_1}
+                onError={onErrorHandler}
+                LoadingComponent={null}
+                ErrorComponent={null}
+                config={{
+                    ...CUSTOM_COLOR_PALETTE_CONFIG,
+                    colorMapping: [
+                        {
+                            id: 'm1',
+                            color: {
+                                type: 'guid',
+                                value: '03'
+                            }
+                        }, {
+                            id: 'm2',
+                            color: {
+                                type: 'guid',
+                                value: '02'
+                            }
+                        }, {
+                            id: 'm1_pop',
+                            color: {
+                                type: 'rgb',
+                                value: {
+                                    r: 0,
+                                    g: 0,
+                                    b: 0
+                                }
+                            }
+                        }
+                    ]
+                }}
+            />
+        </div>
+    ))
+    .add('stacked with color mapping', () => (
+        <div style={wrapperStyle}>
+            <BarChart
+                projectId="storybook"
+                measures={[MEASURE_1]}
+                viewBy={ATTRIBUTE_2}
+                stackBy={ATTRIBUTE_1}
+                onError={onErrorHandler}
+                LoadingComponent={null}
+                ErrorComponent={null}
+                config={{
+                    ...CUSTOM_COLOR_PALETTE_CONFIG,
+                    colorMapping: [
+                        {
+                            id: 'Red',
+                            color: {
+                                type: 'guid',
+                                value: '03'
+                            }
+                        }, {
+                            id: 'Purple',
+                            color: {
+                                type: 'guid',
+                                value: '02'
+                            }
+                        }, {
+                            id: 'Pink',
+                            color: {
+                                type: 'rgb',
+                                value: {
+                                    r: 0,
+                                    g: 0,
+                                    b: 0
+                                }
+                            }
+                        }
+                    ]
+                }}
+            />
+        </div>
     ));
