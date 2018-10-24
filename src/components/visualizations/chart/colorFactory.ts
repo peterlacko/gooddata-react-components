@@ -112,13 +112,9 @@ export class MeasureColorStrategy extends ColorStrategy {
             const itemId = measureGroup.items[measureItemIndex].measureHeaderItem.localIdentifier;
             const mappedColor = getColorFromMapping(itemId, colorPalette, colorMapping);
 
-            let color;
-            if (mappedColor) {
-                color = mappedColor;
-            } else {
-                color = colorPalette[currentColorPaletteIndex % colorPalette.length];
-                currentColorPaletteIndex++;
-            }
+            const color = mappedColor ? mappedColor : colorPalette[currentColorPaletteIndex % colorPalette.length];
+            currentColorPaletteIndex++;
+
             return color;
         });
 
@@ -143,13 +139,8 @@ function getAttributeColorMapping(attribute: any, colorPalette: IColorPalette, c
         const itemId = attribute.items[itemIndex].attributeHeaderItem.name;
         const mappedColor = getColorFromMapping(itemId, colorPalette, colorMapping);
 
-        let color;
-        if (mappedColor) {
-            color = mappedColor;
-        } else {
-            color = colorPalette[currentColorPaletteIndex % colorPalette.length];
-            currentColorPaletteIndex++;
-        }
+        const color = mappedColor ? mappedColor : colorPalette[currentColorPaletteIndex % colorPalette.length];
+        currentColorPaletteIndex++;
 
         return getRgbString(color);
     });
