@@ -179,6 +179,37 @@ storiesOf('URI components', module)
             </div>
         )
     ))
+    .add('chart with PoP measures and color mapping', () => (
+        screenshotWrap(
+            <div style={{ width: 800, height: 400 }}>
+                <Visualization
+                    projectId="myproject"
+                    uri={'/gdc/md/myproject/obj/1003'}
+                    onError={onErrorHandler}
+                    locale="en-US"
+                    LoadingComponent={null}
+                    ErrorComponent={null}
+                    config={{
+                        colorMapping: [
+                            {
+                                id: 'm1',
+                                color: {
+                                    type: 'guid',
+                                    value: 'purple'
+                                }
+                            }, {
+                                id: 'm2',
+                                color: {
+                                    type: 'guid',
+                                    value: 'blue-dark'
+                                }
+                            }
+                        ]
+                    }}
+                />
+            </div>
+        )
+    ))
     .add('chart with arithmetic measures', () => (
         screenshotWrap(
             <div style={{ width: 800, height: 400 }}>
