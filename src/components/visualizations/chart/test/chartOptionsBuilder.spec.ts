@@ -414,6 +414,7 @@ describe('chartOptionsBuilder', () => {
 
             const attributeColorStrategy = new AttributeColorStrategy(
                 DEFAULT_COLOR_PALETTE,
+                undefined,
                 measureGroup,
                 viewByAttribute,
                 stackByAttribute,
@@ -480,6 +481,7 @@ describe('chartOptionsBuilder', () => {
 
             const attributeColorStrategy = new AttributeColorStrategy(
                 DEFAULT_COLOR_PALETTE,
+                undefined,
                 measureGroup,
                 viewByAttribute,
                 stackByAttribute,
@@ -534,6 +536,7 @@ describe('chartOptionsBuilder', () => {
 
             const metricColorStrategy = new MeasureColorStrategy(
                 DEFAULT_COLOR_PALETTE,
+                undefined,
                 measureGroup,
                 viewByAttribute,
                 stackByAttribute,
@@ -552,6 +555,7 @@ describe('chartOptionsBuilder', () => {
 
             const treeMapColorStrategy = new TreeMapColorStrategy(
                 DEFAULT_COLOR_PALETTE,
+                undefined,
                 measureGroup,
                 viewByAttribute,
                 stackByAttribute,
@@ -635,6 +639,7 @@ describe('chartOptionsBuilder', () => {
 
             const attributeColorStrategy = new AttributeColorStrategy(
                 DEFAULT_COLOR_PALETTE,
+                undefined,
                 measureGroup,
                 viewByAttribute,
                 stackByAttribute,
@@ -653,6 +658,7 @@ describe('chartOptionsBuilder', () => {
 
             const treeMapColorStrategy = new TreeMapColorStrategy(
                 DEFAULT_COLOR_PALETTE,
+                undefined,
                 measureGroup,
                 viewByAttribute,
                 stackByAttribute,
@@ -730,6 +736,7 @@ describe('chartOptionsBuilder', () => {
 
             const attributeColorStrategy = new AttributeColorStrategy(
                 DEFAULT_COLOR_PALETTE,
+                undefined,
                 mVS[0],
                 mVS[1],
                 mVS[2],
@@ -801,6 +808,7 @@ describe('chartOptionsBuilder', () => {
 
             const attributeColorStrategy = new AttributeColorStrategy(
                 DEFAULT_COLOR_PALETTE,
+                undefined,
                 mVS[0],
                 mVS[1],
                 mVS[2],
@@ -850,6 +858,7 @@ describe('chartOptionsBuilder', () => {
 
                     const attributeColorStrategy = new AttributeColorStrategy(
                         DEFAULT_COLOR_PALETTE,
+                        undefined,
                         mVS[0],
                         mVS[1],
                         mVS[2],
@@ -959,6 +968,7 @@ describe('chartOptionsBuilder', () => {
 
                 const attributeColorStrategy = new AttributeColorStrategy(
                     colorPalette,
+                    undefined,
                     dummyMeasureGroup,
                     null,
                     stackByAttribute,
@@ -1006,6 +1016,7 @@ describe('chartOptionsBuilder', () => {
 
                 const attributeColorStrategy = new AttributeColorStrategy(
                     colorPalette,
+                    undefined,
                     dummyMeasureGroup,
                     null,
                     stackByAttribute,
@@ -1058,6 +1069,7 @@ describe('chartOptionsBuilder', () => {
 
                 const attributeColorStrategy = new AttributeColorStrategy(
                     colorPalette,
+                    undefined,
                     dummyMeasureGroup,
                     stackByAttribute,
                     stackByAttribute,
@@ -1110,6 +1122,7 @@ describe('chartOptionsBuilder', () => {
 
                 const attributeColorStrategy = new AttributeColorStrategy(
                     colorPalette,
+                    undefined,
                     dummyMeasureGroup,
                     stackByAttribute,
                     stackByAttribute,
@@ -1162,6 +1175,7 @@ describe('chartOptionsBuilder', () => {
 
                 const attributeColorStrategy = new AttributeColorStrategy(
                     colorPalette,
+                    undefined,
                     dummyMeasureGroup,
                     null,
                     stackByAttribute,
@@ -1250,6 +1264,7 @@ describe('chartOptionsBuilder', () => {
 
                 const attributeColorStrategy = new AttributeColorStrategy(
                     colorPaletteWithBlue,
+                    undefined,
                     dummyMeasureGroup,
                     null,
                     stackByAttributeWithThreeElements,
@@ -1276,6 +1291,7 @@ describe('chartOptionsBuilder', () => {
 
                 const treeMapColorStrategy = new TreeMapColorStrategy(
                     DEFAULT_COLOR_PALETTE,
+                    undefined,
                     mVS[0],
                     mVS[1],
                     mVS[2],
@@ -1327,6 +1343,7 @@ describe('chartOptionsBuilder', () => {
                 const type = 'treemap';
                 const treeMapColorStrategy = new TreeMapColorStrategy(
                     DEFAULT_COLOR_PALETTE,
+                    undefined,
                     mVS[0],
                     mVS[1],
                     mVS[2],
@@ -1383,6 +1400,7 @@ describe('chartOptionsBuilder', () => {
 
                 const treeMapColorStrategy = new TreeMapColorStrategy(
                     DEFAULT_COLOR_PALETTE,
+                    undefined,
                     mVS[0],
                     mVS[1],
                     mVS[2],
@@ -1449,6 +1467,7 @@ describe('chartOptionsBuilder', () => {
                 const type = 'treemap';
                 const treeMapColorStrategy = new TreeMapColorStrategy(
                     DEFAULT_COLOR_PALETTE,
+                    undefined,
                     mVS[0],
                     mVS[1],
                     mVS[2],
@@ -1544,6 +1563,7 @@ describe('chartOptionsBuilder', () => {
                 const type = 'treemap';
                 const treeMapColorStrategy = new TreeMapColorStrategy(
                     DEFAULT_COLOR_PALETTE,
+                    undefined,
                     mVS[0],
                     mVS[1],
                     mVS[2],
@@ -1707,6 +1727,7 @@ describe('chartOptionsBuilder', () => {
 
             const metricColorStrategy = new MeasureColorStrategy(
                 DEFAULT_COLOR_PALETTE,
+                undefined,
                 mVS[0],
                 mVS[1],
                 mVS[2],
@@ -1772,6 +1793,7 @@ describe('chartOptionsBuilder', () => {
 
                 const metricColorStrategy = new MeasureColorStrategy(
                     DEFAULT_COLOR_PALETTE,
+                    undefined,
                     mVS[0],
                     mVS[1],
                     mVS[2],
@@ -1814,6 +1836,7 @@ describe('chartOptionsBuilder', () => {
 
             const metricColorStrategy = new MeasureColorStrategy(
                 DEFAULT_COLOR_PALETTE,
+                undefined,
                 mVS[0],
                 mVS[1],
                 mVS[2],
@@ -1897,6 +1920,7 @@ describe('chartOptionsBuilder', () => {
 
                 const metricColorStrategy = new MeasureColorStrategy(
                     DEFAULT_COLOR_PALETTE,
+                    undefined,
                     mVS[0],
                     mVS[1],
                     mVS[2],
@@ -1940,6 +1964,7 @@ describe('chartOptionsBuilder', () => {
             const type = 'bar';
             const metricColorStrategy = new MeasureColorStrategy(
                 DEFAULT_COLOR_PALETTE,
+                undefined,
                 mVS[0],
                 mVS[1],
                 mVS[2],
@@ -1989,6 +2014,7 @@ describe('chartOptionsBuilder', () => {
             const type = 'bar';
             const metricColorStrategy = new MeasureColorStrategy(
                 DEFAULT_COLOR_PALETTE,
+                undefined,
                 mVS[0],
                 mVS[1],
                 mVS[2],
@@ -2039,6 +2065,7 @@ describe('chartOptionsBuilder', () => {
 
             const attColorStrategy = new AttributeColorStrategy(
                 DEFAULT_COLOR_PALETTE,
+                undefined,
                 mVS[0],
                 mVS[1],
                 mVS[2],
@@ -2185,6 +2212,7 @@ describe('chartOptionsBuilder', () => {
 
             const attColorStrategy = new AttributeColorStrategy(
                 DEFAULT_COLOR_PALETTE,
+                undefined,
                 mVS[0],
                 mVS[1],
                 mVS[2],
@@ -3227,7 +3255,7 @@ describe('chartOptionsBuilder', () => {
                         const expectedDataClasses: Highcharts.ColorAxisDataClass[] = [];
                         const dataClasses = getHeatmapDataClasses(
                             series,
-                            new HeatMapColorStrategy(null, null, null, null, null)
+                            new HeatMapColorStrategy(null, null, null, null, null, null)
                         );
 
                         expect(dataClasses).toEqual(expectedDataClasses);
@@ -3249,7 +3277,7 @@ describe('chartOptionsBuilder', () => {
                         ];
                         const dataClasses = getHeatmapDataClasses(
                             series,
-                            new HeatMapColorStrategy(null, null, null, null, null)
+                            new HeatMapColorStrategy(null, null, null, null, null, null)
                         );
 
                         expect(dataClasses).toEqual(expectedDataClasses);
@@ -3286,7 +3314,7 @@ describe('chartOptionsBuilder', () => {
                         ];
                         const dataClasses = getHeatmapDataClasses(
                             series,
-                            new HeatMapColorStrategy(null, null, null, null, null)
+                            new HeatMapColorStrategy(null, null, null, null, null, null)
                         );
 
                         expect(dataClasses).toMatchObject(approximatelyExpectedDataClasses);

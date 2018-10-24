@@ -165,7 +165,12 @@ export class AttributeColorStrategy extends ColorStrategy {
         _afm: AFM.IAfm
     ): HighChartColorPalette {
         const attribute = stackByAttribute ? stackByAttribute : viewByAttribute;
-        return getAttributeColorMapping(attribute, colorPalette, colorMapping);
+        if (colorMapping) {
+            return getAttributeColorMapping(attribute, colorPalette, colorMapping);
+        }
+
+        const itemsCount = attribute.items.length;
+        return range(itemsCount).map(itemIndex => getRgbString(colorPalette[itemIndex % colorPalette.length]));
     }
 }
 
