@@ -332,4 +332,34 @@ storiesOf('Core components/Heatmap', module)
                 />
             </div>
         )
+    )).add('custom colors with color mapping', () => (
+        screenshotWrap(
+            <div style={wrapperStyle}>
+                <Heatmap
+                    projectId="storybook"
+                    measure={MEASURE_1}
+                    columns={ATTRIBUTE_1}
+                    rows={ATTRIBUTE_2}
+                    onError={onErrorHandler}
+                    LoadingComponent={null}
+                    ErrorComponent={null}
+                    config={{
+                        ...CUSTOM_COLOR_PALETTE_CONFIG,
+                        colorMapping: [
+                            {
+                                id: 'm1',
+                                color: {
+                                    type: 'rgb',
+                                    value: {
+                                        r: 0,
+                                        g: 0,
+                                        b: 0
+                                    }
+                                }
+                            }
+                        ]
+                    }}
+                />
+            </div>
+        )
     ));

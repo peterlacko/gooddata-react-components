@@ -1433,8 +1433,9 @@ export function getChartOptions(
             indexSortOrder.push(dataPoint.legendIndex);
             return {
                 // after sorting, colors need to be reassigned in original order and legendIndex needs to be reset
+                // but when color mapping is present, we do not reassign color
                 ...dataPoint,
-                color: get(dataPoints[dataPoint.legendIndex], 'color'),
+                color: config.colorMapping ? dataPoint.color : get(dataPoints[dataPoint.legendIndex], 'color'),
                 legendIndex: dataPointIndex
             };
         });

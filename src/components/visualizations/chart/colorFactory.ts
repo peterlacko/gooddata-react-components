@@ -74,7 +74,7 @@ const emptyColorPaletteItem = { guid: 'none', fill: { r: 0, g: 0, b: 0 } };
 
 function getColorFromMapping(itemId: string, colorPalette: IColorPalette, colorMapping: IColorMap[]
     ): IColorPaletteItem {
-        if (!colorMapping) {
+        if (!colorMapping) { // TODO: remove if we split functionality for with/without colorMapping
             return undefined;
         }
 
@@ -136,6 +136,25 @@ export class MeasureColorStrategy extends ColorStrategy {
     }
 }
 
+function getAttributeColorMapping(attribute: any, colorPalette: IColorPalette, colorMapping: IColorMap[]) {
+    const itemsCount = attribute.items.length;
+    let currentColorPaletteIndex = 0;
+    return range(itemsCount).map((itemIndex) => {
+        const itemId = attribute.items[itemIndex].attributeHeaderItem.name;
+        const mappedColor = getColorFromMapping(itemId, colorPalette, colorMapping);
+
+        let color;
+        if (mappedColor) {
+            color = mappedColor;
+        } else {
+            color = colorPalette[currentColorPaletteIndex % colorPalette.length];
+            currentColorPaletteIndex++;
+        }
+
+        return getRgbString(color);
+    });
+}
+
 export class AttributeColorStrategy extends ColorStrategy {
     protected createPalette(
         colorPalette: IColorPalette,
@@ -145,23 +164,8 @@ export class AttributeColorStrategy extends ColorStrategy {
         stackByAttribute: any,
         _afm: AFM.IAfm
     ): HighChartColorPalette {
-        const attributeItems = stackByAttribute ? stackByAttribute.items : viewByAttribute.items;
-        const itemsCount = attributeItems.length;
-        let currentColorPaletteIndex = 0;
-        return range(itemsCount).map((itemIndex) => {
-            const itemId = attributeItems[itemIndex].attributeHeaderItem.name;
-            const mappedColor = getColorFromMapping(itemId, colorPalette, colorMapping);
-
-            let color;
-            if (mappedColor) {
-                color = mappedColor;
-            } else {
-                color = colorPalette[currentColorPaletteIndex % colorPalette.length];
-                currentColorPaletteIndex++;
-            }
-
-            return getRgbString(color);
-        });
+        const attribute = stackByAttribute ? stackByAttribute : viewByAttribute;
+        return getAttributeColorMapping(attribute, colorPalette, colorMapping);
     }
 }
 
@@ -172,14 +176,22 @@ export class HeatMapColorStrategy extends ColorStrategy {
 
     protected createPalette(
         colorPalette: IColorPalette,
-        _colorMapping: IColorMap[],
-        _measureGroup: MeasureGroupType,
+        colorMapping: IColorMap[],
+        measureGroup: MeasureGroupType,
         _viewByAttribute: any,
         _stackByAttribute: any,
         _afm: AFM.IAfm
     ): HighChartColorPalette {
         if (colorPalette && isCustomPalette(colorPalette) && colorPalette[0]) {
-            return this.getCustomHeatmapColorPalette(colorPalette[0]);
+            let color = colorPalette[0];
+            if (colorMapping) {
+                const measureId = measureGroup.items[0].measureHeaderItem.localIdentifier;
+                const mappedColor = getColorFromMapping(measureId, colorPalette, colorMapping);
+                if (mappedColor) {
+                    color = mappedColor;
+                }
+            }
+            return this.getCustomHeatmapColorPalette(color);
         }
         return HEATMAP_BLUE_COLOR_PALETTE;
     }
@@ -212,7 +224,7 @@ export class HeatMapColorStrategy extends ColorStrategy {
 export class TreeMapColorStrategy extends MeasureColorStrategy {
     protected createPalette(
         colorPalette: IColorPalette,
-        _colorMapping: IColorMap[],
+        colorMapping: IColorMap[],
         measureGroup: MeasureGroupType,
         viewByAttribute: any,
         stackByAttribute: any,
@@ -220,11 +232,17 @@ export class TreeMapColorStrategy extends MeasureColorStrategy {
     ): HighChartColorPalette {
         if (viewByAttribute) {
             const itemsCount = viewByAttribute.items.length;
+
+            if (colorMapping) { // TODO: either we check here or in getColorFromMapping
+                return getAttributeColorMapping(viewByAttribute, colorPalette, colorMapping);
+            }
+
+            // TODO: possibly redundant but less ifs; ^^handles both cases with & without colorMapping
             return range(itemsCount).map(itemIndex => getRgbString(colorPalette[itemIndex % colorPalette.length]));
         }
         return super.createPalette(
             colorPalette,
-            _colorMapping,
+            colorMapping,
             measureGroup,
             viewByAttribute,
             stackByAttribute,
