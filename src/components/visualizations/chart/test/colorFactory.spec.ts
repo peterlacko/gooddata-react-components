@@ -380,9 +380,10 @@ describe('ColorFactory', () => {
             const updatedPalette = getColorsFromStrategy(colorStrategy);
 
             expect(colorStrategy).toBeInstanceOf(MeasureColorStrategy);
-            expect(updatedPalette).toEqual(['rgb(193,193,193)', 'rgb(100,100,100)', 'rgb(213,213,213)',
-                'rgb(150,150,150)', 'rgb(173,173,173)', 'rgb(50,50,50)', 'rgb(193,193,193)', 'rgb(100,100,100)',
-                'rgb(213,213,213)', 'rgb(150,150,150)', 'rgb(233,233,233)', 'rgb(200,200,200)']);
+            expect(updatedPalette).toEqual([ 'rgb(193,193,193)', 'rgb(100,100,100)', 'rgb(213,213,213)',
+                'rgb(150,150,150)', 'rgb(213,213,213)', 'rgb(150,150,150)', 'rgb(233,233,233)', 'rgb(200,200,200)',
+                'rgb(173,173,173)', 'rgb(50,50,50)', 'rgb(193,193,193)', 'rgb(100,100,100)'
+            ]);
         });
     });
 
@@ -505,7 +506,7 @@ describe('ColorFactory', () => {
             );
         });
 
-        it.only('should return HeatmapColorStrategy with properly applied mapping', () => {
+        it('should return HeatmapColorStrategy with properly applied mapping', () => {
             const [measureGroup, viewByAttribute, stackByAttribute] =
                 getMVS(fixtures.heatmapMetricRowColumn);
             const { afm } = fixtures.heatmapMetricRowColumn.executionRequest;
