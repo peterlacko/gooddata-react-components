@@ -258,6 +258,21 @@ storiesOf('Core components/PieChart', module)
             </div>
         )
     ))
+    .add('measure and attribute with custom colors', () => (
+        <div style={wrapperStyle}>
+            <PieChart
+                projectId="storybook"
+                measures={[MEASURE_1]}
+                viewBy={ATTRIBUTE_1}
+                onError={onErrorHandler}
+                LoadingComponent={null}
+                ErrorComponent={null}
+                config={{
+                    ...CUSTOM_COLOR_PALETTE_CONFIG
+                }}
+            />
+        </div>
+    ))
     .add('measure and attribute with color mapping', () => (
         <div style={wrapperStyle}>
             <PieChart
