@@ -55,7 +55,7 @@ import {
 import { getComboChartOptions } from './chartOptions/comboChartOptions';
 import { IDrillableItem } from '../../../interfaces/DrillEvents';
 
-import { ColorFactory, IColorStrategy } from './colorFactory';
+import { ColorFactory, IColorStrategy, IColorConfigItem } from './colorFactory';
 
 const enableAreaChartStacking = (stacking: any) => {
     return stacking || isUndefined(stacking);
@@ -127,6 +127,7 @@ export interface IChartOptions {
     yAxisProps?: any;
     title?: any;
     colorAxis?: Highcharts.ColorAxisOptions;
+    colorMapping?: IColorConfigItem[];
 }
 
 export function isNegativeValueIncluded(series: ISeriesItem[]) {
@@ -1603,7 +1604,8 @@ export function getChartOptions(
             enabled: gridEnabled
         },
         xAxisProps,
-        yAxisProps
+        yAxisProps,
+        colorMapping: colorStrategy.getColorMapping()
     };
 
     return chartOptions;
