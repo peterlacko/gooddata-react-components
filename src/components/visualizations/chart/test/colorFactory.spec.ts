@@ -22,17 +22,10 @@ import { IColorPalette, IColorPaletteItem } from '../Chart';
 
 function getColorsFromStrategy(strategy: IColorStrategy): string[] {
     const res: string[] = [];
-    let color: string;
-    let index = 0;
 
-    do {
-        color = strategy.getColorByIndex(index);
-        if (color !== undefined) {
-            res.push(color);
-        }
-        index++;
+    for (let i = 0; i < strategy.getColorMapping().length; i++) {
+        res.push(strategy.getColorByIndex(i));
     }
-    while (color !== undefined);
 
     return res;
 }

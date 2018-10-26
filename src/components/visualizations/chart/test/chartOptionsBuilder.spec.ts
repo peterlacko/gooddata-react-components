@@ -1834,7 +1834,7 @@ describe('chartOptionsBuilder', () => {
             const mVS = getMVS(dataSet);
             const type = 'bubble';
 
-            const metricColorStrategy = new MeasureColorStrategy(
+            const attributeColorStrategy = new AttributeColorStrategy(
                 DEFAULT_COLOR_PALETTE,
                 undefined,
                 mVS[0],
@@ -1843,6 +1843,8 @@ describe('chartOptionsBuilder', () => {
                 fixtures.bubbleChartWith3MetricsAndAttribute.executionRequest.afm
             );
 
+            // console.log('measureStrategy', metricColorStrategy.getColorMapping());
+
             const seriesWithoutDrillability = getSeries(
                 dataSet.executionResult.data,
                 mVS[0],
@@ -1850,7 +1852,7 @@ describe('chartOptionsBuilder', () => {
                 mVS[2],
                 type,
                 dataSet.mdObject,
-                metricColorStrategy
+                attributeColorStrategy
             );
             const drillableMeasures = [{
                 uri: dataSet.executionResponse.dimensions[1]
@@ -1918,7 +1920,7 @@ describe('chartOptionsBuilder', () => {
                 const mVS = getMVS(dataSetWithNulls);
                 const type = 'bubble';
 
-                const metricColorStrategy = new MeasureColorStrategy(
+                const attributeColorStrategy = new AttributeColorStrategy(
                     DEFAULT_COLOR_PALETTE,
                     undefined,
                     mVS[0],
@@ -1934,7 +1936,7 @@ describe('chartOptionsBuilder', () => {
                     mVS[2],
                     type,
                     dataSetWithNulls.mdObject,
-                    metricColorStrategy
+                    attributeColorStrategy
                 );
 
                 const drillableMeasures = [{

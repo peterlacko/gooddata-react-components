@@ -27,9 +27,9 @@ import { IColorPalette, IColorPaletteItem, IColorMap, IRGBColor } from './Chart'
 
 export interface IColorStrategy {
     getColorByIndex(index: number): string;
-    getColorMapping(): IColorConfigItem[];
+    getColorMapping(): IColorFullMapItem[];
 }
-export interface IColorConfigItem {
+export interface IColorFullMapItem {
     name?: string;
     localIdentifier?: string;
     guid?: string;
@@ -46,7 +46,7 @@ export const attributeChartSupportedTypes = [
 ];
 
 export abstract class ColorStrategy implements IColorStrategy {
-    protected palette: IColorConfigItem[];
+    protected palette: IColorFullMapItem[];
     constructor(
         colorPalette: IColorPalette,
         colorMapping: IColorMap[],
@@ -65,7 +65,7 @@ export abstract class ColorStrategy implements IColorStrategy {
     }
 
     public getColorByIndex(index: number): string {
-        return this.palette[index].color;
+        return this.palette[index] && this.palette[index].color;
     }
 
     public getColorMapping() {
@@ -79,7 +79,7 @@ export abstract class ColorStrategy implements IColorStrategy {
         viewByAttribute: any,
         stackByAttribute: any,
         afm: AFM.IAfm
-    ): IColorConfigItem[];
+    ): IColorFullMapItem[];
 }
 const emptyColorPaletteItem = { guid: 'none', fill: { r: 0, g: 0, b: 0 } };
 
@@ -112,7 +112,7 @@ export class MeasureColorStrategy extends ColorStrategy {
         _viewByAttribute: any,
         _stackByAttribute: any,
         afm: AFM.IAfm
-    ): IColorConfigItem[] {
+    ): IColorFullMapItem[] {
         let currentColorPaletteIndex = 0;
 
         const paletteMeasures = range(measureGroup.items.length).map((measureItemIndex) => {
@@ -187,7 +187,7 @@ export class AttributeColorStrategy extends ColorStrategy {
         viewByAttribute: any,
         stackByAttribute: any,
         _afm: AFM.IAfm
-    ): IColorConfigItem[] {
+    ): IColorFullMapItem[] {
         const attribute = stackByAttribute ? stackByAttribute : viewByAttribute;
         return getAttributeColorMapping(attribute, colorPalette, colorMapping);
     }
@@ -205,7 +205,7 @@ export class HeatmapColorStrategy extends ColorStrategy {
         _viewByAttribute: any,
         _stackByAttribute: any,
         _afm: AFM.IAfm
-    ): IColorConfigItem[] {
+    ): IColorFullMapItem[] {
         let mappedColor;
         if (colorMapping) {
             const measureId = measureGroup.items[0].measureHeaderItem.localIdentifier;
@@ -259,7 +259,7 @@ export class TreemapColorStrategy extends MeasureColorStrategy {
         viewByAttribute: any,
         stackByAttribute: any,
         afm: AFM.IAfm
-    ): IColorConfigItem[] {
+    ): IColorFullMapItem[] {
         if (viewByAttribute) {
             return getAttributeColorMapping(viewByAttribute, colorPalette, colorMapping);
         }
