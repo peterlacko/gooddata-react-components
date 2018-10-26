@@ -86,7 +86,10 @@ export function getLegendItems(chartOptions: any): LegendOptionsItemType[] {
         .filter((legendDataSourceItem: any) =>
             legendDataSourceItem.showInLegend !== false)
         .map((legendDataSourceItem: any) =>
-            pick(legendDataSourceItem, ['name', 'color', 'legendIndex']));
+            pick(legendDataSourceItem, ['name', 'color', 'legendIndex']))
+        .sort((a: any, b: any) => {
+            return a.name.localeCompare(b.name);
+        });
 }
 
 export default function getLegend(legendConfig: any = {}, chartOptions: any): ILegendOptions {

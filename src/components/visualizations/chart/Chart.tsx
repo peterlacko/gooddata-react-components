@@ -101,7 +101,7 @@ export interface IColorPaletteItem {
     fill: IRGBColor;
 }
 
-type IFind = (item: IColorPaletteItem) => boolean;
+export type IFind = (item: IColorPaletteItem) => boolean;
 
 export interface IColorPalette {
     [index: number]: IColorPaletteItem;
