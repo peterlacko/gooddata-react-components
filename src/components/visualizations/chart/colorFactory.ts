@@ -85,7 +85,7 @@ const emptyColorPaletteItem = { guid: 'none', fill: { r: 0, g: 0, b: 0 } };
 
 function getColorFromMapping(itemId: string, colorPalette: IColorPalette, colorMapping: IColorMap[]
     ): IColorPaletteItem {
-        if (!colorMapping) { // TODO: remove if we split functionality for with/without colorMapping
+        if (!colorMapping) {
             return undefined;
         }
 
@@ -172,6 +172,7 @@ function getAttributeColorMapping(attribute: any, colorPalette: IColorPalette, c
 
         return {
             name: itemId,
+            localIdentifier: itemId,
             guid: color.guid,
             color: getRgbString(color)
         };
@@ -188,16 +189,11 @@ export class AttributeColorStrategy extends ColorStrategy {
         _afm: AFM.IAfm
     ): IColorConfigItem[] {
         const attribute = stackByAttribute ? stackByAttribute : viewByAttribute;
-        // if (colorMapping) {
         return getAttributeColorMapping(attribute, colorPalette, colorMapping);
-        // }
-
-        // const itemsCount = attribute.items.length;
-        // return range(itemsCount).map(itemIndex => getRgbString(colorPalette[itemIndex % colorPalette.length]));
     }
 }
 
-export class HeatMapColorStrategy extends ColorStrategy {
+export class HeatmapColorStrategy extends ColorStrategy {
     public getColorByIndex(index: number): string {
         return this.palette[index % this.palette.length].color;
     }
@@ -210,17 +206,19 @@ export class HeatMapColorStrategy extends ColorStrategy {
         _stackByAttribute: any,
         _afm: AFM.IAfm
     ): IColorConfigItem[] {
-        if (colorPalette && isCustomPalette(colorPalette) && colorPalette[0]) {
-            let color = colorPalette[0];
-            if (colorMapping) {
-                const measureId = measureGroup.items[0].measureHeaderItem.localIdentifier;
-                const mappedColor = getColorFromMapping(measureId, colorPalette, colorMapping);
-                if (mappedColor) {
-                    color = mappedColor;
-                }
+        let mappedColor;
+        if (colorMapping) {
+            const measureId = measureGroup.items[0].measureHeaderItem.localIdentifier;
+            mappedColor = getColorFromMapping(measureId, colorPalette, colorMapping);
+            if (mappedColor) {
+                return this.getCustomHeatmapColorPalette(mappedColor).map(color => ({ color }));
             }
-            return this.getCustomHeatmapColorPalette(color).map(color => ({ color }));
         }
+
+        if (colorPalette && isCustomPalette(colorPalette) && colorPalette[0]) {
+            return this.getCustomHeatmapColorPalette(colorPalette[0]).map(color => ({ color }));
+        }
+
         return HEATMAP_BLUE_COLOR_PALETTE.map((color) => {
             return {
                 color
@@ -253,7 +251,7 @@ export class HeatMapColorStrategy extends ColorStrategy {
     }
 }
 
-export class TreeMapColorStrategy extends MeasureColorStrategy {
+export class TreemapColorStrategy extends MeasureColorStrategy {
     protected createPalette(
         colorPalette: IColorPalette,
         colorMapping: IColorMap[],
@@ -263,14 +261,7 @@ export class TreeMapColorStrategy extends MeasureColorStrategy {
         afm: AFM.IAfm
     ): IColorConfigItem[] {
         if (viewByAttribute) {
-            // const itemsCount = viewByAttribute.items.length;
-
-            // if (colorMapping) { // TODO: either we check here or in getColorFromMapping
             return getAttributeColorMapping(viewByAttribute, colorPalette, colorMapping);
-            // }
-
-            // TODO: possibly redundant but less ifs; ^^handles both cases with & without colorMapping
-            // return range(itemsCount).map(itemIndex => getRgbString(colorPalette[itemIndex % colorPalette.length]));
         }
         return super.createPalette(
             colorPalette,
@@ -300,7 +291,7 @@ export class ColorFactory {
     ): IColorStrategy {
 
         if (isHeatmap(type)) {
-            return new HeatMapColorStrategy(
+            return new HeatmapColorStrategy(
                 colorPalette,
                 colorMapping,
                 measureGroup,
@@ -310,7 +301,7 @@ export class ColorFactory {
         }
 
         if (isTreemap(type)) {
-            return new TreeMapColorStrategy(
+            return new TreemapColorStrategy(
                 colorPalette,
                 colorMapping,
                 measureGroup,

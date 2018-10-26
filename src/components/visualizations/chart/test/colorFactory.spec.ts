@@ -1,9 +1,9 @@
 // (C) 2007-2018 GoodData Corporation
 import {
-    TreeMapColorStrategy,
+    TreemapColorStrategy,
     MeasureColorStrategy,
     AttributeColorStrategy,
-    HeatMapColorStrategy,
+    HeatmapColorStrategy,
     ColorFactory,
     IColorStrategy
 } from '../colorFactory';
@@ -388,7 +388,7 @@ describe('ColorFactory', () => {
     });
 
     describe('TreemapColorStrategy', () => {
-        it('should return TreeMapColorStrategy strategy with two colors from default color palette', () => {
+        it('should return TreemapColorStrategy strategy with two colors from default color palette', () => {
             const [measureGroup, viewByAttribute, stackByAttribute] =
                 getMVS(fixtures.treemapWithMetricViewByAndStackByAttribute);
             const { afm } = fixtures.treemapWithMetricViewByAndStackByAttribute.executionRequest;
@@ -407,7 +407,7 @@ describe('ColorFactory', () => {
 
             const updatedPalette = getColorsFromStrategy(colorStrategy);
 
-            expect(colorStrategy).toBeInstanceOf(TreeMapColorStrategy);
+            expect(colorStrategy).toBeInstanceOf(TreemapColorStrategy);
             expect(updatedPalette).toEqual(
                 DEFAULT_COLOR_PALETTE
                     .slice(0, 1)
@@ -443,7 +443,7 @@ describe('ColorFactory', () => {
 
             const updatedPalette = getColorsFromStrategy(colorStrategy);
 
-            expect(colorStrategy).toBeInstanceOf(TreeMapColorStrategy);
+            expect(colorStrategy).toBeInstanceOf(TreemapColorStrategy);
             expect(updatedPalette).toEqual(
                 ['rgb(50,50,50)']
             );
@@ -451,7 +451,7 @@ describe('ColorFactory', () => {
     });
 
     describe('HeatmapColorStrategy', () => {
-        it('should return HeatMapColorStrategy strategy with 7 colors from default heatmap color palette', () => {
+        it('should return HeatmapColorStrategy strategy with 7 colors from default heatmap color palette', () => {
             const [measureGroup, viewByAttribute, stackByAttribute] =
                 getMVS(fixtures.heatmapMetricRowColumn);
             const { afm } = fixtures.heatmapMetricRowColumn.executionRequest;
@@ -467,13 +467,13 @@ describe('ColorFactory', () => {
                 type
             );
 
-            expect(colorStrategy).toBeInstanceOf(HeatMapColorStrategy);
+            expect(colorStrategy).toBeInstanceOf(HeatmapColorStrategy);
             [0, 1, 2, 3, 4, 5, 6].map((colorIndex: number) =>
                 expect(colorStrategy.getColorByIndex(colorIndex)).toEqual(HEATMAP_BLUE_COLOR_PALETTE[colorIndex])
             );
         });
 
-        it('should return HeatMapColorStrategy strategy with 7 colors'
+        it('should return HeatmapColorStrategy strategy with 7 colors'
             + ' based on the first color from custom palette', () => {
             const [measureGroup, viewByAttribute, stackByAttribute] =
                 getMVS(fixtures.heatmapMetricRowColumn);
@@ -500,7 +500,7 @@ describe('ColorFactory', () => {
                 type
             );
 
-            expect(colorStrategy).toBeInstanceOf(HeatMapColorStrategy);
+            expect(colorStrategy).toBeInstanceOf(HeatmapColorStrategy);
             [0, 1, 2, 3, 4, 5, 6].map((colorIndex: number) =>
                 expect(colorStrategy.getColorByIndex(colorIndex)).toEqual(expectedColors[colorIndex])
             );
@@ -541,7 +541,7 @@ describe('ColorFactory', () => {
                 type
             );
 
-            expect(colorStrategy).toBeInstanceOf(HeatMapColorStrategy);
+            expect(colorStrategy).toBeInstanceOf(HeatmapColorStrategy);
             [0, 1, 2, 3, 4, 5, 6].map((colorIndex: number) =>
                 expect(colorStrategy.getColorByIndex(colorIndex)).toEqual(expectedColors[colorIndex])
             );

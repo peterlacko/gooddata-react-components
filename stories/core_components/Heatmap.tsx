@@ -344,17 +344,13 @@ storiesOf('Core components/Heatmap', module)
                     LoadingComponent={null}
                     ErrorComponent={null}
                     config={{
-                        ...CUSTOM_COLOR_PALETTE_CONFIG,
+                        // ...CUSTOM_COLOR_PALETTE_CONFIG,
                         colorMapping: [
                             {
                                 id: 'm1',
                                 color: {
-                                    type: 'rgb',
-                                    value: {
-                                        r: 0,
-                                        g: 0,
-                                        b: 0
-                                    }
+                                    type: 'guid',
+                                    value: 'green'
                                 }
                             }
                         ]
