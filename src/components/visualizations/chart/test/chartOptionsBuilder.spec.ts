@@ -1843,8 +1843,6 @@ describe('chartOptionsBuilder', () => {
                 fixtures.bubbleChartWith3MetricsAndAttribute.executionRequest.afm
             );
 
-            // console.log('measureStrategy', metricColorStrategy.getColorMapping());
-
             const seriesWithoutDrillability = getSeries(
                 dataSet.executionResult.data,
                 mVS[0],
