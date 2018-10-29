@@ -57,6 +57,7 @@ export interface IRGBMapColor {
 
 export interface IColorMap {
     id: string; // title for attribute element or identifier for measure
+    name?: string;
     color: IPaletteColor | IRGBMapColor;
 }
 
