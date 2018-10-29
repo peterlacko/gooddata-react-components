@@ -143,9 +143,7 @@ describe('ChartTransformation', () => {
             const passedProps = createChartRendererProps(fixtures.barChartWithViewByAttribute);
             expect(passedProps.legend.enabled).toEqual(false);
             expect(pushData).toBeCalledWith({
-                colorMapping: [{
-                    color: 'rgb(20,178,226)', guid: 'blue', localIdentifier: 'amountMetric', name: 'Amount'
-                }],
+                colorMapping: [{ color: { type: 'guid', value: 'blue' }, id: 'amountMetric', name: 'Amount' }],
                 propertiesMeta: {
                     legend_enabled: false
                 }
@@ -157,14 +155,11 @@ describe('ChartTransformation', () => {
             expect(passedProps.legend.enabled).toEqual(true);
             expect(passedProps.legend.position).toEqual(TOP);
             expect(pushData).toBeCalledWith({
-                colorMapping: [{
-                    color: 'rgb(20,178,226)', guid: 'blue',
-                    localIdentifier: 'lostMetric', name: '<button>Lost</button> ...'
-                }, {
-                    color: 'rgb(0,193,141)', guid: 'green', localIdentifier: 'wonMetric', name: 'Won'
-                }, {
-                    color: 'rgb(229,77,66)', guid: 'red', localIdentifier: 'expectedMetric', name: 'Expected'
-                }],
+                colorMapping: [
+                    { color: { type: 'guid', value: 'blue' }, id: 'lostMetric', name: '<button>Lost</button> ...' },
+                    { color: { type: 'guid', value: 'green' }, id: 'wonMetric', name: 'Won' },
+                    { color: { type: 'guid', value: 'red' }, id: 'expectedMetric', name: 'Expected' }
+                ],
                 propertiesMeta: {
                     legend_enabled: true
                 }

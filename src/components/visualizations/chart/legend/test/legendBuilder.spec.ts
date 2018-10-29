@@ -137,9 +137,9 @@ describe('getLegendItems', () => {
         const chartOptions = generateChartOptions(fixtures.pieChartWithMetricsOnly, { type: 'pie' });
         expect(getLegendItems(chartOptions)).toEqual([
             {
-                color: 'rgb(0,193,141)',
-                legendIndex: 0,
-                name: 'Won'
+                color: 'rgb(229,77,66)',
+                legendIndex: 2,
+                name: 'Expected'
             },
             {
                 color: 'rgb(20,178,226)',
@@ -147,9 +147,9 @@ describe('getLegendItems', () => {
                 name: 'Lost'
             },
             {
-                color: 'rgb(229,77,66)',
-                legendIndex: 2,
-                name: 'Expected'
+                color: 'rgb(0,193,141)',
+                legendIndex: 0,
+                name: 'Won'
             }
         ]);
     });

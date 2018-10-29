@@ -217,7 +217,7 @@ export class HeatmapColorStrategy extends ColorStrategy {
         _afm: AFM.IAfm
     ): IColorMap[] {
         let mappedColor;
-        const measureId = measureGroup.items[0].measureHeaderItem.localIdentifier;
+        const measureId = measureGroup && measureGroup.items[0].measureHeaderItem.localIdentifier;
         if (colorMapping) {
             mappedColor = getColorFromMapping(measureId, colorMapping);
             if (mappedColor) {
@@ -242,7 +242,7 @@ export class HeatmapColorStrategy extends ColorStrategy {
 
         return [{
             id: measureId,
-            name: measureGroup.items[0].measureHeaderItem.name,
+            name: measureGroup && measureGroup.items[0].measureHeaderItem.name,
             color: {
                 type: 'guid',
                 value: 'HEATMAP_DEFAULT'
