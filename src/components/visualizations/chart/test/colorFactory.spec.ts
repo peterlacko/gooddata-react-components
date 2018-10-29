@@ -18,7 +18,7 @@ import {
 import { CUSTOM_COLOR_PALETTE } from '../../../../../stories/data/colors';
 
 import * as fixtures from '../../../../../stories/test_data/fixtures';
-import { IColorPalette, IColorPaletteItem } from '../Chart';
+import { IColorPalette, IColorPaletteItem, RGBType } from '../Chart';
 
 function getColorsFromStrategy(strategy: IColorStrategy): string[] {
     const res: string[] = [];
@@ -179,7 +179,7 @@ describe('ColorFactory', () => {
                 }, {
                     id: 'invalid',
                     color: {
-                        type: 'rgb',
+                        type: 'rgb' as RGBType,
                         value: {
                             r: 0,
                             g: 0,
@@ -189,7 +189,7 @@ describe('ColorFactory', () => {
                 }, {
                     id: 'West Coast',
                     color: {
-                        type: 'rgb',
+                        type: 'rgb' as RGBType,
                         value: {
                             r: 0,
                             g: 0,

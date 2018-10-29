@@ -39,6 +39,9 @@ export interface IChartLimits {
     dataPoints?: number;
 }
 
+export type GuidType = 'guid';
+export type RGBType = 'rgb';
+
 export interface IPaletteColor {
     type: string;
     value: string;
@@ -51,7 +54,7 @@ export interface IRGBColor {
 }
 
 export interface IRGBMapColor {
-    type: string;
+    type: RGBType;
     value: IRGBColor;
 }
 
