@@ -312,7 +312,7 @@ export class AttributeDropdownWrapped
 
     private renderList() {
         const { isListReady, items, selection, listError, totalCount } = this.state;
-        const { getListError, getListLoading, getListNoResults } = this.props;
+        const { getListError, getListLoading, getListNoResults, getListItem } = this.props;
 
         if (listError) {
             return this.renderOverlayWrap(getListError(listError, this.props, this.state), true);
@@ -334,7 +334,7 @@ export class AttributeDropdownWrapped
                 selection={selection}
                 isInverted={this.state.isInverted}
                 showSearchField={false}
-                rowItem={<AttributeFilterItem />}
+                rowItem={getListItem()}
                 maxSelectionSize={MAX_SELECTION_SIZE}
                 width={LIST_WIDTH}
                 itemHeight={ITEM_HEIGHT}

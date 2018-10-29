@@ -9,6 +9,7 @@ import { CUSTOM_COLORS } from '../data/colors';
 import {
     ATTRIBUTE_1,
     ATTRIBUTE_2,
+    ATTRIBUTE_3,
     MEASURE_1,
     MEASURE_1_WITH_ALIAS,
     MEASURE_2,
@@ -20,8 +21,44 @@ import {
 } from '../data/componentProps';
 import { GERMAN_SEPARATORS } from '../data/numberFormat';
 import { CUSTOM_COLOR_PALETTE_CONFIG } from '../data/configProps';
+import { ColoredItemsList } from '../../src/components/simple/ColoredItemsList';
+import { IntlWrapper } from '../../src/components/core/base/IntlWrapper';
 
 const wrapperStyle = { width: 800, height: 400 };
+
+const item1 = {
+    localIdentifier: 'm1', color: 'rgb(255,0,0)', name: 'Test measure'
+};
+
+const item2 = {
+    localIdentifier: 'm2', color: 'rgb(0,255,0)', name: 'Test measure 02'
+};
+
+const item3 = {
+    localIdentifier: 'm3', color: 'rgb(100,255,0)', name: 'Test measure 03'
+};
+
+const item4 = {
+    localIdentifier: 'm4', color: 'rgb(200,255,0)', name: 'Test measure 04'
+};
+
+const item5 = {
+    localIdentifier: 'm5', color: 'rgb(0,255,100)', name: 'Test measure 05'
+};
+
+const item6 = {
+    localIdentifier: 'm6', color: 'rgb(0,255,200)', name: 'Test measure 06'
+};
+
+const item7 = {
+    localIdentifier: 'm7', color: 'rgb(50,255,50)', name: 'Test measure 07'
+};
+
+let items: any[] = [item1, item2, item3, item4, item5, item6, item7];
+
+function refreshItems({ colorMapping }: any) {
+    items = colorMapping;
+}
 
 storiesOf('Core components/BarChart', module)
     .add('two measures, one attribute', () => (
@@ -367,31 +404,35 @@ storiesOf('Core components/BarChart', module)
     ))
     .add('stacked with color mapping', () => (
         <div style={wrapperStyle}>
+            <IntlWrapper locale="en-US">
+                <ColoredItemsList inputItems={items} />
+            </IntlWrapper>
             <BarChart
                 projectId="storybook"
                 measures={[MEASURE_1]}
                 viewBy={ATTRIBUTE_2}
-                stackBy={ATTRIBUTE_1}
+                stackBy={ATTRIBUTE_3}
                 onError={onErrorHandler}
                 LoadingComponent={null}
                 ErrorComponent={null}
+                pushData={refreshItems}
                 config={{
                     ...CUSTOM_COLOR_PALETTE_CONFIG,
                     colorMapping: [
                         {
-                            id: 'Red',
-                            color: {
-                                type: 'guid',
-                                value: '03'
-                            }
-                        }, {
-                            id: 'Purple',
+                            id: 'rep3',
                             color: {
                                 type: 'guid',
                                 value: '02'
                             }
                         }, {
-                            id: 'Pink',
+                            id: 'rep4',
+                            color: {
+                                type: 'guid',
+                                value: '02'
+                            }
+                        }, {
+                            id: 'rep10',
                             color: {
                                 type: 'rgb',
                                 value: {
