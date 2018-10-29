@@ -17,7 +17,7 @@ import range = require('lodash/range');
 import unescape = require('lodash/unescape');
 import without = require('lodash/without');
 
-import { IChartConfig, IChartLimits } from './Chart';
+import { IChartConfig, IChartLimits, IColorMap } from './Chart';
 import {
     getAttributeElementIdFromAttributeElementUri,
     isAreaChart,
@@ -55,7 +55,7 @@ import {
 import { getComboChartOptions } from './chartOptions/comboChartOptions';
 import { IDrillableItem } from '../../../interfaces/DrillEvents';
 
-import { ColorFactory, IColorStrategy, IColorFullMapItem } from './colorFactory';
+import { ColorFactory, IColorStrategy } from './colorFactory';
 
 const enableAreaChartStacking = (stacking: any) => {
     return stacking || isUndefined(stacking);
@@ -127,7 +127,7 @@ export interface IChartOptions {
     yAxisProps?: any;
     title?: any;
     colorAxis?: Highcharts.ColorAxisOptions;
-    colorMapping?: IColorFullMapItem[];
+    colorMapping?: IColorMap[];
 }
 
 export function isNegativeValueIncluded(series: ISeriesItem[]) {

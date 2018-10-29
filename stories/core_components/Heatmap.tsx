@@ -344,7 +344,6 @@ storiesOf('Core components/Heatmap', module)
                     LoadingComponent={null}
                     ErrorComponent={null}
                     config={{
-                        // ...CUSTOM_COLOR_PALETTE_CONFIG,
                         colorMapping: [
                             {
                                 id: 'm1',
