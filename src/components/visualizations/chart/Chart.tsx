@@ -54,7 +54,7 @@ export interface IRGBColor {
 }
 
 export interface IRGBMapColor {
-    type: 'rgb';
+    type: RGBType;
     value: IRGBColor;
 }
 
