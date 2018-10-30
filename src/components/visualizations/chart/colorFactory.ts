@@ -21,7 +21,15 @@ import {
     isDerivedMeasure,
     findParentMeasureIndex
 } from './chartOptionsBuilder';
-import { IColorPalette, IColorMap, IRGBColor, IPaletteColor, IRGBMapColor, RGBType, GuidType } from './Chart';
+
+import {
+    IColorPalette,
+    IColorMap,
+    IRGBColor,
+    IGuidColorItem,
+    RGBType,
+    IColorItem
+} from './Chart';
 
 export interface IColorStrategy {
     getColorByIndex(index: number): string;
@@ -87,10 +95,10 @@ export abstract class ColorStrategy implements IColorStrategy {
     ): IColorMap[];
 }
 
-const emptyColorPaletteItem = { type: 'guid', value: 'none' };
+const emptyColorPaletteItem: IGuidColorItem = { type: 'guid', value: 'none' };
 
 function getColorFromMapping(itemId: string, colorMapping: IColorMap[]
-    ): IPaletteColor | IRGBMapColor {
+    ): IColorItem {
         if (!colorMapping) {
             return undefined;
         }
@@ -116,42 +124,84 @@ export class MeasureColorStrategy extends ColorStrategy {
         _stackByAttribute: any,
         afm: AFM.IAfm
     ): IColorMap[] {
+        const colorMap = this.mapColorsFromMeasures(measureGroup, afm, colorMapping, colorPalette);
+        return this.mapColorsFromDerivedMeasure(measureGroup, afm, colorMap, colorPalette);
+    }
+
+    private mapColorsFromMeasures(
+        measureGroup: MeasureGroupType,
+        afm: AFM.IAfm,
+        colorMapping: IColorMap[],
+        colorPalette: IColorPalette
+    ): IColorMap[] {
         let currentColorPaletteIndex = 0;
 
-        const paletteMeasures = range(measureGroup.items.length).map((measureItemIndex) => {
-            const itemId = measureGroup.items[measureItemIndex].measureHeaderItem.localIdentifier;
-            if (isDerivedMeasure(measureGroup.items[measureItemIndex], afm)) {
+        const colorMap = measureGroup.items.map((item, index) => {
+            const itemId = item.measureHeaderItem.localIdentifier;
+
+            if (isDerivedMeasure(measureGroup.items[index], afm)) {
                 return {
                     id: itemId,
                     color: emptyColorPaletteItem
                 };
             }
 
-            const mappedColor = getColorFromMapping(itemId, colorMapping);
+            const mappedMeasure: IColorMap = this.mapMeasureColor(
+                itemId,
+                currentColorPaletteIndex,
+                index,
+                measureGroup,
+                colorPalette,
+                colorMapping
+            );
 
-            const color = mappedColor ? mappedColor :
-                {
-                    type: 'guid' as GuidType,
-                    value: colorPalette[currentColorPaletteIndex % colorPalette.length].guid
-                };
             currentColorPaletteIndex++;
 
-            return {
-                id: itemId,
-                name: measureGroup.items[measureItemIndex].measureHeaderItem.name,
-                color
-            };
+            return mappedMeasure;
+
         });
 
-        return paletteMeasures.map((colorConfig, measureItemIndex) => {
+        return colorMap;
+    }
+
+    private mapMeasureColor(
+        itemId: string,
+        currentColorPaletteIndex: number,
+        measureItemIndex: number,
+        measureGroup: MeasureGroupType,
+        colorPalette: IColorPalette,
+        colorMapping: IColorMap[]
+    ): IColorMap {
+        const mappedColor = getColorFromMapping(itemId, colorMapping);
+
+        const color: IColorItem = mappedColor ? mappedColor :
+            {
+                type: 'guid',
+                value: colorPalette[currentColorPaletteIndex % colorPalette.length].guid
+            };
+
+        return {
+            id: itemId,
+            name: measureGroup.items[measureItemIndex].measureHeaderItem.name,
+            color
+        };
+    }
+
+    private mapColorsFromDerivedMeasure(
+        measureGroup: MeasureGroupType,
+        afm: AFM.IAfm,
+        colorMap: IColorMap[],
+        colorPalette: IColorPalette
+    ): IColorMap[] {
+        return colorMap.map((colorMapItem, measureItemIndex) => {
             if (!isDerivedMeasure(measureGroup.items[measureItemIndex], afm)) {
-                return colorConfig;
+                return colorMapItem;
             }
             const parentMeasureIndex = findParentMeasureIndex(afm, measureItemIndex);
             if (parentMeasureIndex > -1) {
-                const sourceMeasureColor = paletteMeasures[parentMeasureIndex].color;
+                const sourceMeasureColor = colorMap[parentMeasureIndex].color;
                 return {
-                    ...colorConfig,
+                    ...colorMapItem,
                     color: {
                         type: 'rgb' as RGBType,
                         value: sourceMeasureColor.type === 'guid'
@@ -161,8 +211,8 @@ export class MeasureColorStrategy extends ColorStrategy {
                 };
             }
             return {
-                ...colorConfig,
-                color: colorConfig.color
+                ...colorMapItem,
+                color: colorMapItem.color
             };
         });
     }

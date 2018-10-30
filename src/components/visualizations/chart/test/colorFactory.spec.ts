@@ -18,7 +18,12 @@ import {
 import { CUSTOM_COLOR_PALETTE } from '../../../../../stories/data/colors';
 
 import * as fixtures from '../../../../../stories/test_data/fixtures';
-import { IColorPalette, IColorPaletteItem, RGBType } from '../Chart';
+import {
+    IColorPalette,
+    IColorPaletteItem,
+    RGBType,
+    IColorMap
+} from '../Chart';
 
 function getColorsFromStrategy(strategy: IColorStrategy): string[] {
     const res: string[] = [];
@@ -169,7 +174,7 @@ describe('ColorFactory', () => {
                     b: 255
                 }
             }];
-            const colorMapping = [
+            const colorMapping: IColorMap[] = [
                 {
                     id: 'East Coast',
                     color: {
@@ -338,7 +343,7 @@ describe('ColorFactory', () => {
                 getMVS(fixtures.barChartWith6PopMeasuresAndViewByAttribute);
             const { afm } = fixtures.barChartWith6PopMeasuresAndViewByAttribute.executionRequest;
             const type = 'column';
-            const colorMapping = [
+            const colorMapping: IColorMap[] = [
                 {
                     id: 'amountMeasure_0',
                     color: {
@@ -414,7 +419,7 @@ describe('ColorFactory', () => {
             const { afm } = fixtures.treemapWithMetricViewByAndStackByAttribute.executionRequest;
             const type = 'treemap';
 
-            const colorMapping = [
+            const colorMapping: IColorMap[] = [
                 {
                     id: 'Direct Sales',
                     color: {
@@ -514,7 +519,7 @@ describe('ColorFactory', () => {
                 'rgb(182,204,114)',
                 'rgb(168,194,86)'
             ];
-            const colorMapping = [
+            const colorMapping: IColorMap[] = [
                 {
                     id: 'amountMeasure',
                     color: {

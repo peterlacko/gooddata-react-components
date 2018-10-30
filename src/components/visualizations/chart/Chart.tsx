@@ -42,26 +42,28 @@ export interface IChartLimits {
 export type GuidType = 'guid';
 export type RGBType = 'rgb';
 
-export interface IPaletteColor {
-    type: string;
-    value: string;
-}
-
 export interface IRGBColor {
     r: number;
     g: number;
     b: number;
 }
 
-export interface IRGBMapColor {
+export interface IGuidColorItem {
+    type: GuidType;
+    value: string;
+}
+
+export interface IRGBColorItem {
     type: RGBType;
     value: IRGBColor;
 }
 
+export type IColorItem = IGuidColorItem | IRGBColorItem;
+
 export interface IColorMap {
     id: string; // title for attribute element or identifier for measure
     name?: string;
-    color: IPaletteColor | IRGBMapColor;
+    color: IColorItem;
 }
 
 export interface IChartConfig {
