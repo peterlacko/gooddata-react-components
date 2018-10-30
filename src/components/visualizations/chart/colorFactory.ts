@@ -131,7 +131,7 @@ export class MeasureColorStrategy extends ColorStrategy {
 
             const color = mappedColor ? mappedColor :
                 {
-                    type: 'guid' as GuidType,
+                    type: 'guid' as 'guid',
                     value: colorPalette[currentColorPaletteIndex % colorPalette.length].guid
                 };
             currentColorPaletteIndex++;
@@ -153,7 +153,7 @@ export class MeasureColorStrategy extends ColorStrategy {
                 return {
                     ...colorConfig,
                     color: {
-                        type: 'rgb',
+                        type: 'rgb' as 'rgb',
                         value: sourceMeasureColor.type === 'guid'
                         ? getLighterColorFromRGB(getColorByGuid(colorPalette, sourceMeasureColor.value as string), 0.6)
                         : getLighterColorFromRGB(sourceMeasureColor.value as IRGBColor, 0.6)
