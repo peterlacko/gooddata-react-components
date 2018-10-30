@@ -17,7 +17,7 @@ import range = require('lodash/range');
 import unescape = require('lodash/unescape');
 import without = require('lodash/without');
 
-import { IChartConfig, IChartLimits, IColorMap } from './Chart';
+import { IChartConfig, IChartLimits, IColorMap, IColorPalette } from './Chart';
 import {
     getAttributeElementIdFromAttributeElementUri,
     isAreaChart,
@@ -128,6 +128,7 @@ export interface IChartOptions {
     title?: any;
     colorAxis?: Highcharts.ColorAxisOptions;
     colorMapping?: IColorMap[];
+    colorPalette?: IColorPalette;
 }
 
 export function isNegativeValueIncluded(series: ISeriesItem[]) {
@@ -1605,7 +1606,8 @@ export function getChartOptions(
         },
         xAxisProps,
         yAxisProps,
-        colorMapping: colorStrategy.getColorMapping()
+        colorMapping: colorStrategy.getColorMapping(),
+        colorPalette: config.colorPalette
     };
 
     return chartOptions;
