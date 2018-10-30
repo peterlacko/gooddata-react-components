@@ -43,7 +43,7 @@ export type GuidType = 'guid';
 export type RGBType = 'rgb';
 
 export interface IPaletteColor {
-    type: string;
+    type: 'guid';
     value: string;
 }
 
@@ -54,7 +54,7 @@ export interface IRGBColor {
 }
 
 export interface IRGBMapColor {
-    type: RGBType;
+    type: 'rgb';
     value: IRGBColor;
 }
 

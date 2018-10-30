@@ -260,57 +260,61 @@ storiesOf('Core components/PieChart', module)
         )
     ))
     .add('measure and attribute with custom colors', () => (
-        <div style={wrapperStyle}>
-            <PieChart
-                projectId="storybook"
-                measures={[MEASURE_1]}
-                viewBy={ATTRIBUTE_1}
-                onError={onErrorHandler}
-                LoadingComponent={null}
-                ErrorComponent={null}
-                config={{
-                    ...CUSTOM_COLOR_PALETTE_CONFIG
-                }}
-            />
-        </div>
+        screenshotWrap(
+            <div style={wrapperStyle}>
+                <PieChart
+                    projectId="storybook"
+                    measures={[MEASURE_1]}
+                    viewBy={ATTRIBUTE_1}
+                    onError={onErrorHandler}
+                    LoadingComponent={null}
+                    ErrorComponent={null}
+                    config={{
+                        ...CUSTOM_COLOR_PALETTE_CONFIG
+                    }}
+                />
+            </div>
+        )
     ))
     .add('measure and attribute with color mapping', () => (
-        <div style={wrapperStyle}>
-            <PieChart
-                projectId="storybook"
-                measures={[MEASURE_1]}
-                viewBy={ATTRIBUTE_1}
-                onError={onErrorHandler}
-                LoadingComponent={null}
-                ErrorComponent={null}
-                config={{
-                    ...CUSTOM_COLOR_PALETTE_CONFIG,
-                    colorMapping: [
-                        {
-                            id: 'Red',
-                            color: {
-                                type: 'guid',
-                                value: '03'
-                            }
-                        }, {
-                            id: 'Purple',
-                            color: {
-                                type: 'guid',
-                                value: '02'
-                            }
-                        }, {
-                            id: 'Pink',
-                            color: {
-                                type: 'rgb' as RGBType,
-                                value: {
-                                    r: 0,
-                                    g: 0,
-                                    b: 0
+        screenshotWrap(
+            <div style={wrapperStyle}>
+                <PieChart
+                    projectId="storybook"
+                    measures={[MEASURE_1]}
+                    viewBy={ATTRIBUTE_1}
+                    onError={onErrorHandler}
+                    LoadingComponent={null}
+                    ErrorComponent={null}
+                    config={{
+                        ...CUSTOM_COLOR_PALETTE_CONFIG,
+                        colorMapping: [
+                            {
+                                id: 'Red',
+                                color: {
+                                    type: 'guid',
+                                    value: '03'
+                                }
+                            }, {
+                                id: 'Purple',
+                                color: {
+                                    type: 'guid',
+                                    value: '02'
+                                }
+                            }, {
+                                id: 'Pink',
+                                color: {
+                                    type: 'rgb' as RGBType,
+                                    value: {
+                                        r: 0,
+                                        g: 0,
+                                        b: 0
+                                    }
                                 }
                             }
-                        }
-                    ]
-                }}
-            />
-        </div>
+                        ]
+                    }}
+                />
+            </div>
+        )
     ));

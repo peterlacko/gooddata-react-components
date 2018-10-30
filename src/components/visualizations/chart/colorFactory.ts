@@ -21,7 +21,7 @@ import {
     isDerivedMeasure,
     findParentMeasureIndex
 } from './chartOptionsBuilder';
-import { IColorPalette, IColorMap, IRGBColor, IPaletteColor, IRGBMapColor, RGBType } from './Chart';
+import { IColorPalette, IColorMap, IRGBColor, IPaletteColor, IRGBMapColor, RGBType, GuidType } from './Chart';
 
 export interface IColorStrategy {
     getColorByIndex(index: number): string;
@@ -131,7 +131,7 @@ export class MeasureColorStrategy extends ColorStrategy {
 
             const color = mappedColor ? mappedColor :
                 {
-                    type: 'guid',
+                    type: 'guid' as GuidType,
                     value: colorPalette[currentColorPaletteIndex % colorPalette.length].guid
                 };
             currentColorPaletteIndex++;
@@ -153,7 +153,7 @@ export class MeasureColorStrategy extends ColorStrategy {
                 return {
                     ...colorConfig,
                     color: {
-                        type: 'rgb' as RGBType,
+                        type: 'rgb',
                         value: sourceMeasureColor.type === 'guid'
                         ? getLighterColorFromRGB(getColorByGuid(colorPalette, sourceMeasureColor.value as string), 0.6)
                         : getLighterColorFromRGB(sourceMeasureColor.value as IRGBColor, 0.6)
