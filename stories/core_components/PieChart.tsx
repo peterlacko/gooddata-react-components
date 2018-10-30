@@ -22,6 +22,7 @@ import {
     DATA_LABELS_AUTO_CONFIG,
     CUSTOM_COLOR_PALETTE_CONFIG
 } from '../data/configProps';
+import { RGBType } from '../../src/components/visualizations/chart/Chart';
 
 const wrapperStyle = { width: 400, height: 400 };
 
@@ -300,7 +301,7 @@ storiesOf('Core components/PieChart', module)
                         }, {
                             id: 'Pink',
                             color: {
-                                type: 'rgb',
+                                type: 'rgb' as RGBType,
                                 value: {
                                     r: 0,
                                     g: 0,

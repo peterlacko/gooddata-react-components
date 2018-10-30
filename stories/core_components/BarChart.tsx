@@ -20,6 +20,7 @@ import {
 } from '../data/componentProps';
 import { GERMAN_SEPARATORS } from '../data/numberFormat';
 import { CUSTOM_COLOR_PALETTE_CONFIG } from '../data/configProps';
+import { RGBType } from '../../src/components/visualizations/chart/Chart';
 
 const wrapperStyle = { width: 800, height: 400 };
 
@@ -352,7 +353,7 @@ storiesOf('Core components/BarChart', module)
                         }, {
                             id: 'm1_pop',
                             color: {
-                                type: 'rgb',
+                                type: 'rgb' as RGBType,
                                 value: {
                                     r: 0,
                                     g: 0,
@@ -393,7 +394,7 @@ storiesOf('Core components/BarChart', module)
                         }, {
                             id: 'Pink',
                             color: {
-                                type: 'rgb',
+                                type: 'rgb' as RGBType,
                                 value: {
                                     r: 0,
                                     g: 0,
