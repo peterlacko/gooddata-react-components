@@ -1466,7 +1466,9 @@ export function getChartOptions(
                 measureGroup,
                 series,
                 categories
-            )
+            ),
+            colorMapping: colorStrategy.getColorMapping(),
+            colorPalette: config.colorPalette
         };
     }
 
@@ -1501,7 +1503,9 @@ export function getChartOptions(
                 enabled: gridEnabled
             },
             xAxisProps,
-            yAxisProps
+            yAxisProps,
+            colorMapping: colorStrategy.getColorMapping(),
+            colorPalette: config.colorPalette
         };
     }
 
@@ -1532,7 +1536,9 @@ export function getChartOptions(
                 dataClasses: getHeatmapDataClasses(series, colorStrategy)
             },
             xAxisProps,
-            yAxisProps
+            yAxisProps,
+            colorMapping: colorStrategy.getColorMapping(),
+            colorPalette: config.colorPalette
         };
     }
 
@@ -1577,7 +1583,9 @@ export function getChartOptions(
                 enabled: gridEnabled
             },
             xAxisProps,
-            yAxisProps
+            yAxisProps,
+            colorMapping: colorStrategy.getColorMapping(),
+            colorPalette: config.colorPalette
         };
     }
 
