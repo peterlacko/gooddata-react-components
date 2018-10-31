@@ -21,7 +21,7 @@ import HighChartsRenderer, {
 import { IChartConfig } from './Chart';
 import { OnFiredDrillEvent, OnLegendReady } from '../../../interfaces/Events';
 import { IDrillableItem } from '../../../interfaces/DrillEvents';
-import { IPushData } from '../../../../src/interfaces/PushData';
+// import { IPushData } from '../../../../src/interfaces/PushData';
 
 export function renderHighCharts(props: IHighChartsRendererProps) {
     return <HighChartsRenderer {...props} />;
@@ -48,7 +48,7 @@ export interface IChartTransformationProps {
     onLegendReady: OnLegendReady;
 
     afterRender(): void;
-    pushData?(data: IPushData): void;
+    pushData?(data: any): void;
     renderer(arg: IHighChartsRendererProps): JSX.Element;
     onDataTooLarge(chartOptions: any): void;
     onNegativeValues(chartOptions: any): void;
