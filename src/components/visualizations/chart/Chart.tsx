@@ -66,10 +66,23 @@ export interface IColorMap {
     color: IColorItem;
 }
 
+export interface IReferences {
+    localIdentifier?: string;
+    uri?: string;
+    name?: string;
+}
+
+export type ColorAssignmentPredicate = (references: IReferences) => boolean;
+
+export interface IColorAssignment {
+    predicate: ColorAssignmentPredicate;
+    color: IColorItem; // my_red, rgb(1, 2, 3)
+}
+
 export interface IChartConfig {
     colors?: string[];
     colorPalette?: IColorPalette;
-    colorMapping?: IColorMap[];
+    colorAssignment?: IColorAssignment[];
     type?: VisType;
     legend?: ILegendConfig;
     legendLayout?: string;
