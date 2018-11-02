@@ -60,19 +60,18 @@ export interface IRGBColorItem {
 
 export type IColorItem = IGuidColorItem | IRGBColorItem;
 
-export interface IColorMap {
-    id: string; // title for attribute element or identifier for measure
-    name?: string;
+export type IMappingHeader = Execution.IResultAttributeHeaderItem | Execution.IMeasureHeaderItem;
+
+export type ColorAssignmentPredicate = (mappingHeader: IMappingHeader) => boolean;
+
+export interface IColorAssignment { // < send to SDK
+    predicate: ColorAssignmentPredicate;
     color: IColorItem;
 }
 
-export type IReferences = Execution.IResultAttributeHeaderItem | Execution.IMeasureHeaderItem; // TODO: rename
-
-export type ColorAssignmentPredicate = (references: IReferences) => boolean;
-
-export interface IColorAssignment {
-    predicate: ColorAssignmentPredicate;
-    color: IColorItem; // my_red, rgb(1, 2, 3)
+export interface IColorMap { // send from SDK using pushData
+    headerItem: IMappingHeader;
+    color: IColorItem;
 }
 
 export interface IChartConfig {
