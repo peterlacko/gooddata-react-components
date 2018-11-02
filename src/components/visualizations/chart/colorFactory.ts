@@ -222,7 +222,7 @@ function getAttributeColorMapping(
     ): IColorMap[] {
     let currentColorPaletteIndex = 0;
     return attribute.items.map((headerItem: any) => {
-        const mappedColor = getColorFromMapping(headerItem.attributeHeaderItem, colorAssignment);
+        const mappedColor = getColorFromMapping(headerItem, colorAssignment);
 
         const color = mappedColor ? mappedColor
             : {

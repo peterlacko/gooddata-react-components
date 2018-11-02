@@ -178,14 +178,17 @@ describe('ColorFactory', () => {
             }];
             const colorAssignment: IColorAssignment[] = [
                 {
-                    predicate: ({ uri }) =>
-                        uri === '/gdc/md/d20eyb3wfs0xe5l0lfscdnrnyhq1t42q/obj/1024/elements?id=1225',
+                    predicate: (headerItem: Execution.IResultAttributeHeaderItem) =>
+                        headerItem.attributeHeaderItem && (headerItem.attributeHeaderItem.uri
+                            === '/gdc/md/d20eyb3wfs0xe5l0lfscdnrnyhq1t42q/obj/1024/elements?id=1225'),
                     color: {
                         type: 'guid',
                         value: 'blue'
                     }
                 }, {
-                    predicate: ({ uri }) => uri === 'invalid',
+                    predicate: (headerItem: Execution.IResultAttributeHeaderItem) =>
+                        headerItem.attributeHeaderItem && (headerItem.attributeHeaderItem.uri
+                            === 'invalid'),
                     color: {
                         type: 'rgb' as RGBType,
                         value: {
@@ -195,14 +198,15 @@ describe('ColorFactory', () => {
                         }
                     }
                 }, {
-                    predicate: ({ uri }) =>
-                        uri === '/gdc/md/d20eyb3wfs0xe5l0lfscdnrnyhq1t42q/obj/1024/elements?id=1237',
+                    predicate: (headerItem: Execution.IResultAttributeHeaderItem) =>
+                        headerItem.attributeHeaderItem && (headerItem.attributeHeaderItem.uri
+                            === '/gdc/md/d20eyb3wfs0xe5l0lfscdnrnyhq1t42q/obj/1024/elements?id=1237'),
                     color: {
                         type: 'rgb' as RGBType,
                         value: {
                             r: 0,
                             g: 0,
-                            b: 0
+                            b: 1
                         }
                     }
                 }
@@ -222,7 +226,7 @@ describe('ColorFactory', () => {
 
             expect(colorStrategy).toBeInstanceOf(AttributeColorStrategy);
             expect(updatedPalette).toEqual(
-                [ 'rgb(0,0,255)', 'rgb(0,0,0)']
+                [ 'rgb(0,0,255)', 'rgb(0,0,1)']
             );
         });
     });
@@ -342,7 +346,7 @@ describe('ColorFactory', () => {
                 expect(itemsCount).toEqual(updatedPalette.length);
             });
 
-        it.only('should return MeasureColorStrategy with properly applied mapping', () => {
+        it('should return MeasureColorStrategy with properly applied mapping', () => {
             const [measureGroup, viewByAttribute, stackByAttribute] =
                 getMVS(fixtures.barChartWith6PopMeasuresAndViewByAttribute);
             const { afm } = fixtures.barChartWith6PopMeasuresAndViewByAttribute.executionRequest;
@@ -350,21 +354,21 @@ describe('ColorFactory', () => {
             const colorAssignment: IColorAssignment[] = [
                 {
                     predicate: (headerItem: Execution.IMeasureHeaderItem) =>
-                        headerItem.measureHeaderItem.name === 'amountMeasure_0',
+                        headerItem.measureHeaderItem.localIdentifier === 'amountMeasure_0',
                     color: {
                         type: 'guid',
                         value: '02'
                     }
                 }, {
                     predicate: (headerItem: Execution.IMeasureHeaderItem) =>
-                        headerItem.measureHeaderItem.name === 'amountPopMeasure_0',
+                        headerItem.measureHeaderItem.localIdentifier === 'amountPopMeasure_0',
                     color: {
                         type: 'guid',
                         value: '03'
                     }
                 }, {
                     predicate: (headerItem: Execution.IMeasureHeaderItem) =>
-                        headerItem.measureHeaderItem.name === 'amountMeasure_1',
+                        headerItem.measureHeaderItem.localIdentifier === 'amountMeasure_1',
                     color: {
                         type: 'guid',
                         value: '03'
@@ -428,7 +432,8 @@ describe('ColorFactory', () => {
 
             const colorAssignment: IColorAssignment[] = [
                 {
-                    predicate: ({ localIdentifier }) => localIdentifier === 'amountMetric',
+                    predicate: (headerItem: Execution.IMeasureHeaderItem) =>
+                        headerItem.measureHeaderItem.localIdentifier === 'amountMetric',
                     color: {
                         type: 'guid',
                         value: '02'
@@ -529,7 +534,7 @@ describe('ColorFactory', () => {
             const colorAssignment: IColorAssignment[] = [
                 {
                     predicate: (headerItem: Execution.IMeasureHeaderItem) =>
-                        headerItem.measureHeaderItem.name === 'amountMeasure',
+                        headerItem.measureHeaderItem.localIdentifier === 'amountMeasure',
                     color: {
                         type: 'guid',
                         value: '02'
