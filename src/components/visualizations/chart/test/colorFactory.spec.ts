@@ -22,7 +22,6 @@ import {
     IColorPalette,
     IColorPaletteItem,
     RGBType,
-    IColorMap,
     IColorAssignment
 } from '../Chart';
 import { Execution } from '@gooddata/typings';

@@ -69,7 +69,7 @@ export abstract class ColorStrategy implements IColorStrategy {
             afm
         );
 
-        this.palette = this.createPalette(colorPalette, this.colorMapping);
+        this.palette = this.createPalette(colorPalette, this.colorMapping, viewByAttribute);
     }
 
     public getColorByIndex(index: number): string {
@@ -80,7 +80,7 @@ export abstract class ColorStrategy implements IColorStrategy {
         return this.colorMapping;
     }
 
-    protected createPalette(colorPalette: IColorPalette, colorMapping: IColorMap[]): string[] {
+    protected createPalette(colorPalette: IColorPalette, colorMapping: IColorMap[], _viewByAttribute: any): string[] {
         return colorMapping.map((map) => {
             const color = map.color.type === 'guid'
                 ? getColorByGuid(colorPalette, map.color.value as string) : map.color.value as IRGBColor;
@@ -367,18 +367,27 @@ export class ScatterPlotColorStrategy extends MeasureColorStrategy {
         colorPalette: IColorPalette,
         colorAssignment: IColorAssignment[],
         measureGroup: MeasureGroupType,
-        viewByAttribute: any,
-        stackByAttribute: any,
-        afm: AFM.IAfm
+        _viewByAttribute: any,
+        _stackByAttribute: any,
+        _afm: AFM.IAfm
     ): IColorMap[] {
-        return super.createColorMapping(
-            colorPalette,
-            colorAssignment,
-            measureGroup,
-            viewByAttribute,
-            stackByAttribute,
-            afm
-        );
+        const measureHeaderItem = measureGroup.items[0];
+        const colorMapping = getColorFromMapping(measureHeaderItem, colorAssignment);
+        const color: IColorItem = colorMapping ? colorMapping : { type: 'guid', value: colorPalette[0].guid };
+        return [{
+            headerItem: measureHeaderItem,
+            color
+        }];
+    }
+
+    protected createPalette(colorPalette: IColorPalette, colorMapping: IColorMap[], viewByAttribute: any): string[] {
+        const length = viewByAttribute ? viewByAttribute.items.length : 1;
+        const color = colorMapping[0].color.type === 'guid'
+            ? getColorByGuid(colorPalette, colorMapping[0].color.value as string)
+            : colorMapping[0].color.value as IRGBColor;
+        return range(length).map(() => {
+            return getRgbStringFromRGB(color);
+        });
     }
 }
 
