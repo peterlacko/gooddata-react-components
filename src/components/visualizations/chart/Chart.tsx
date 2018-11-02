@@ -2,7 +2,7 @@
 import isEqual = require('lodash/isEqual');
 import noop = require('lodash/noop');
 import * as React from 'react';
-import { VisualizationObject } from '@gooddata/typings';
+import { VisualizationObject, Execution } from '@gooddata/typings';
 import { initChartPlugins } from './highcharts/chartPlugins';
 import { VisType } from '../../../constants/visualizationTypes';
 import { IDataLabelsConfig } from '../../../interfaces/Config';
@@ -66,11 +66,7 @@ export interface IColorMap {
     color: IColorItem;
 }
 
-export interface IReferences {
-    localIdentifier?: string;
-    uri?: string;
-    name?: string;
-}
+export type IReferences = Execution.IResultAttributeHeaderItem | Execution.IMeasureHeaderItem; // TODO: rename
 
 export type ColorAssignmentPredicate = (references: IReferences) => boolean;
 

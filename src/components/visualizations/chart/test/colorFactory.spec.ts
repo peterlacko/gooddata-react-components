@@ -22,7 +22,8 @@ import {
     IColorPalette,
     IColorPaletteItem,
     RGBType,
-    IColorMap
+    IColorMap,
+    IColorAssignment
 } from '../Chart';
 
 function getColorsFromStrategy(strategy: IColorStrategy): string[] {
@@ -174,15 +175,16 @@ describe('ColorFactory', () => {
                     b: 255
                 }
             }];
-            const colorMapping: IColorMap[] = [
+            const colorAssignment: IColorAssignment[] = [
                 {
-                    id: 'East Coast',
+                    predicate: ({ uri }) =>
+                        uri === '/gdc/md/d20eyb3wfs0xe5l0lfscdnrnyhq1t42q/obj/1024/elements?id=1225',
                     color: {
                         type: 'guid',
                         value: 'blue'
                     }
                 }, {
-                    id: 'invalid',
+                    predicate: ({ uri }) => uri === 'invalid',
                     color: {
                         type: 'rgb' as RGBType,
                         value: {
@@ -192,7 +194,8 @@ describe('ColorFactory', () => {
                         }
                     }
                 }, {
-                    id: 'West Coast',
+                    predicate: ({ uri }) =>
+                        uri === '/gdc/md/d20eyb3wfs0xe5l0lfscdnrnyhq1t42q/obj/1024/elements?id=1237',
                     color: {
                         type: 'rgb' as RGBType,
                         value: {
@@ -206,7 +209,7 @@ describe('ColorFactory', () => {
 
             const colorStrategy = ColorFactory.getColorStrategy(
                 colorPalette,
-                colorMapping,
+                colorAssignment,
                 measureGroup,
                 viewByAttribute,
                 stackByAttribute,
@@ -343,21 +346,21 @@ describe('ColorFactory', () => {
                 getMVS(fixtures.barChartWith6PopMeasuresAndViewByAttribute);
             const { afm } = fixtures.barChartWith6PopMeasuresAndViewByAttribute.executionRequest;
             const type = 'column';
-            const colorMapping: IColorMap[] = [
+            const colorAssignment: IColorAssignment[] = [
                 {
-                    id: 'amountMeasure_0',
+                    predicate: ({ localIdentifier }) => localIdentifier === 'amountMeasure_0',
                     color: {
                         type: 'guid',
                         value: '02'
                     }
                 }, {
-                    id: 'amountPopMeasure_0',
+                    predicate: ({ localIdentifier }) => localIdentifier === 'amountPopMeasure_0',
                     color: {
                         type: 'guid',
                         value: '03'
                     }
                 }, {
-                    id: 'amountMeasure_1',
+                    predicate: ({ localIdentifier }) => localIdentifier === 'amountMeasure_1',
                     color: {
                         type: 'guid',
                         value: '03'
@@ -367,7 +370,7 @@ describe('ColorFactory', () => {
 
             const colorStrategy = ColorFactory.getColorStrategy(
                 customPalette,
-                colorMapping,
+                colorAssignment,
                 measureGroup,
                 viewByAttribute,
                 stackByAttribute,
@@ -419,9 +422,9 @@ describe('ColorFactory', () => {
             const { afm } = fixtures.treemapWithMetricViewByAndStackByAttribute.executionRequest;
             const type = 'treemap';
 
-            const colorMapping: IColorMap[] = [
+            const colorAssignment: IColorAssignment[] = [
                 {
-                    id: 'Direct Sales',
+                    predicate: ({ localIdentifier }) => localIdentifier === 'amountMetric',
                     color: {
                         type: 'guid',
                         value: '02'
@@ -431,7 +434,7 @@ describe('ColorFactory', () => {
 
             const colorStrategy = ColorFactory.getColorStrategy(
                 customPalette,
-                colorMapping,
+                colorAssignment,
                 measureGroup,
                 viewByAttribute,
                 stackByAttribute,
@@ -443,7 +446,7 @@ describe('ColorFactory', () => {
 
             expect(colorStrategy).toBeInstanceOf(TreemapColorStrategy);
             expect(updatedPalette).toEqual(
-                ['rgb(50,50,50)']
+                ['rgb(100,100,100)']
             );
         });
     });
@@ -519,9 +522,9 @@ describe('ColorFactory', () => {
                 'rgb(182,204,114)',
                 'rgb(168,194,86)'
             ];
-            const colorMapping: IColorMap[] = [
+            const colorAssignment: IColorAssignment[] = [
                 {
-                    id: 'amountMeasure',
+                    predicate: ({ localIdentifier }) => localIdentifier === 'amountMeasure',
                     color: {
                         type: 'guid',
                         value: '02'
@@ -531,7 +534,7 @@ describe('ColorFactory', () => {
 
             const colorStrategy = ColorFactory.getColorStrategy(
                 CUSTOM_COLOR_PALETTE,
-                colorMapping,
+                colorAssignment,
                 measureGroup,
                 viewByAttribute,
                 stackByAttribute,

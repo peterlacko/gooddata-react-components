@@ -12,7 +12,8 @@ import {
 import {
     isHeatmap,
     isOneOfTypes,
-    isTreemap
+    isTreemap,
+    isScatterPlot
 } from '../utils/common';
 
 import { VisualizationTypes } from '../../../constants/visualizationTypes';
@@ -167,14 +168,15 @@ export class MeasureColorStrategy extends ColorStrategy {
     }
 
     private mapMeasureColor(
-        localIdentifier: string,
+        measureHeaderItem: Execution.IMeasureHeaderItem,
         currentColorPaletteIndex: number,
         measureItemIndex: number,
         measureGroup: MeasureGroupType,
         colorPalette: IColorPalette,
         colorAssignment: IColorAssignment[]
     ): IColorMap {
-        const mappedColor = getColorFromMapping({ localIdentifier }, colorAssignment);
+        const mappedColor = getColorFromMapping(measureHeaderItem, colorAssignment);
+        const { localIdentifier } = measureHeaderItem.measureHeaderItem;
 
         const color: IColorItem = mappedColor ? mappedColor :
             {
@@ -358,6 +360,27 @@ export class TreemapColorStrategy extends MeasureColorStrategy {
         stackByAttribute: any,
         afm: AFM.IAfm
     ): IColorMap[] {
+
+        return super.createColorMapping(
+            colorPalette,
+            colorAssignment,
+            measureGroup,
+            viewByAttribute,
+            stackByAttribute,
+            afm
+        );
+    }
+}
+
+export class ScatterPlotColorStrategy extends MeasureColorStrategy {
+    protected createColorMapping(
+        colorPalette: IColorPalette,
+        colorAssignment: IColorAssignment[],
+        measureGroup: MeasureGroupType,
+        viewByAttribute: any,
+        stackByAttribute: any,
+        afm: AFM.IAfm
+    ): IColorMap[] {
         if (viewByAttribute) {
             return getAttributeColorMapping(viewByAttribute, colorPalette, colorAssignment);
         }
@@ -400,6 +423,16 @@ export class ColorFactory {
 
         if (isTreemap(type)) {
             return new TreemapColorStrategy(
+                colorPalette,
+                colorAssignment,
+                measureGroup,
+                viewByAttribute,
+                stackByAttribute,
+                afm);
+        }
+
+        if (isScatterPlot(type)) {
+            return new ScatterPlotColorStrategy(
                 colorPalette,
                 colorAssignment,
                 measureGroup,
