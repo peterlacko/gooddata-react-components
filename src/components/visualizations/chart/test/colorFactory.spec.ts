@@ -25,6 +25,7 @@ import {
     IColorMap,
     IColorAssignment
 } from '../Chart';
+import { Execution } from '@gooddata/typings';
 
 function getColorsFromStrategy(strategy: IColorStrategy): string[] {
     const res: string[] = [];
@@ -341,26 +342,29 @@ describe('ColorFactory', () => {
                 expect(itemsCount).toEqual(updatedPalette.length);
             });
 
-        it('should return MeasureColorStrategy with properly applied mapping', () => {
+        it.only('should return MeasureColorStrategy with properly applied mapping', () => {
             const [measureGroup, viewByAttribute, stackByAttribute] =
                 getMVS(fixtures.barChartWith6PopMeasuresAndViewByAttribute);
             const { afm } = fixtures.barChartWith6PopMeasuresAndViewByAttribute.executionRequest;
             const type = 'column';
             const colorAssignment: IColorAssignment[] = [
                 {
-                    predicate: ({ localIdentifier }) => localIdentifier === 'amountMeasure_0',
+                    predicate: (headerItem: Execution.IMeasureHeaderItem) =>
+                        headerItem.measureHeaderItem.name === 'amountMeasure_0',
                     color: {
                         type: 'guid',
                         value: '02'
                     }
                 }, {
-                    predicate: ({ localIdentifier }) => localIdentifier === 'amountPopMeasure_0',
+                    predicate: (headerItem: Execution.IMeasureHeaderItem) =>
+                        headerItem.measureHeaderItem.name === 'amountPopMeasure_0',
                     color: {
                         type: 'guid',
                         value: '03'
                     }
                 }, {
-                    predicate: ({ localIdentifier }) => localIdentifier === 'amountMeasure_1',
+                    predicate: (headerItem: Execution.IMeasureHeaderItem) =>
+                        headerItem.measureHeaderItem.name === 'amountMeasure_1',
                     color: {
                         type: 'guid',
                         value: '03'
@@ -524,7 +528,8 @@ describe('ColorFactory', () => {
             ];
             const colorAssignment: IColorAssignment[] = [
                 {
-                    predicate: ({ localIdentifier }) => localIdentifier === 'amountMeasure',
+                    predicate: (headerItem: Execution.IMeasureHeaderItem) =>
+                        headerItem.measureHeaderItem.name === 'amountMeasure',
                     color: {
                         type: 'guid',
                         value: '02'
