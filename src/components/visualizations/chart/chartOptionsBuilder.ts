@@ -1381,7 +1381,6 @@ export function getChartOptions(
             attributeHeaderItems[STACK_BY_DIMENSION_INDEX]
         );
     }
-    console.log('dimensions', dimensions);
 
     invariant(measureGroup, 'missing measureGroup');
 

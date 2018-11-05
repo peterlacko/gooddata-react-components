@@ -74,7 +74,6 @@ export function BubbleChart(props: IBubbleChartProps): JSX.Element {
         ...newProps.config,
         mdObject: convertBucketsToMdObject(buckets, props.filters, 'local:bubble')
     };
-    console.log('llllundefined', newProps.config.mdObject.buckets);
 
     return (
         <AfmBubbleChart

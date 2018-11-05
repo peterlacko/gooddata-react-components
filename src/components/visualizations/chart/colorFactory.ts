@@ -71,7 +71,6 @@ export abstract class ColorStrategy implements IColorStrategy {
         );
 
         this.palette = this.createPalette(colorPalette, this.colorMapping, viewByAttribute, stackByAttribute);
-        console.log('palette', this.palette);
     }
 
     public getColorByIndex(index: number): string {
