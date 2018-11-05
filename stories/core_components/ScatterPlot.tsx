@@ -19,6 +19,7 @@ import {
     DATA_LABELS_HIDDEN_CONFIG,
     DATA_LABELS_AUTO_CONFIG
 } from '../data/configProps';
+import { Execution } from '@gooddata/typings';
 
 const wrapperStyle = { width: 800, height: 400 };
 
@@ -122,6 +123,36 @@ storiesOf('Core components/ScatterPlot', module)
                             min: '500',
                             max: '950'
                         }
+                    }}
+                />
+            </div>
+        )
+    ))
+    .add('with color mapping', () => (
+        screenshotWrap(
+            <div style={wrapperStyle}>
+                <ScatterPlot
+                    projectId="storybook"
+                    // xAxisMeasure={MEASURE_1}
+                    yAxisMeasure={MEASURE_2}
+                    attribute={ATTRIBUTE_1}
+                    onError={onErrorHandler}
+                    LoadingComponent={null}
+                    ErrorComponent={null}
+                    config={{
+                        colorAssignment: [{
+                            predicate: (headerItem: Execution.IMeasureHeaderItem) =>
+                                headerItem.measureHeaderItem && (headerItem.measureHeaderItem.localIdentifier
+                                    === 'm2'),
+                            color: {
+                                type: 'rgb',
+                                value: {
+                                    r: 0,
+                                    g: 0,
+                                    b: 0
+                                }
+                            }}
+                        ]
                     }}
                 />
             </div>

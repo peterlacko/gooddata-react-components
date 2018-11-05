@@ -343,17 +343,17 @@ storiesOf('Core components/Heatmap', module)
                     onError={onErrorHandler}
                     LoadingComponent={null}
                     ErrorComponent={null}
-                    config={{
-                        colorMapping: [
-                            {
-                                id: 'm1',
-                                color: {
-                                    type: 'guid',
-                                    value: 'green'
-                                }
-                            }
-                        ]
-                    }}
+                    // config={{
+                    //     colorMapping: [
+                    //         {
+                    //             id: 'm1',
+                    //             color: {
+                    //                 type: 'guid',
+                    //                 value: 'green'
+                    //             }
+                    //         }
+                    //     ]
+                    // }}
                 />
             </div>
         )

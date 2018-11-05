@@ -21,6 +21,7 @@ import {
 import { GERMAN_SEPARATORS } from '../data/numberFormat';
 import { CUSTOM_COLOR_PALETTE_CONFIG } from '../data/configProps';
 import { RGBType } from '../../src/components/visualizations/chart/Chart';
+import { Execution } from '@gooddata/typings';
 
 const wrapperStyle = { width: 800, height: 400 };
 
@@ -338,21 +339,27 @@ storiesOf('Core components/BarChart', module)
                     ErrorComponent={null}
                     config={{
                         ...CUSTOM_COLOR_PALETTE_CONFIG,
-                        colorMapping: [
+                        colorAssignment: [
                             {
-                                id: 'm1',
+                                predicate: (headerItem: Execution.IMeasureHeaderItem) =>
+                                    headerItem.measureHeaderItem && (headerItem.measureHeaderItem.localIdentifier
+                                        === 'm1'),
                                 color: {
                                     type: 'guid',
-                                    value: '03'
+                                    value: '04'
                                 }
                             }, {
-                                id: 'm2',
+                                predicate:  (headerItem: Execution.IMeasureHeaderItem) =>
+                                    headerItem.measureHeaderItem && (headerItem.measureHeaderItem.localIdentifier
+                                        === 'm2'),
                                 color: {
                                     type: 'guid',
                                     value: '02'
                                 }
                             }, {
-                                id: 'm1_pop',
+                                predicate:  (headerItem: Execution.IMeasureHeaderItem) =>
+                                    headerItem.measureHeaderItem && (headerItem.measureHeaderItem.localIdentifier
+                                        === 'm1_pop'),
                                 color: {
                                     type: 'rgb' as RGBType,
                                     value: {
@@ -381,21 +388,27 @@ storiesOf('Core components/BarChart', module)
                     ErrorComponent={null}
                     config={{
                         ...CUSTOM_COLOR_PALETTE_CONFIG,
-                        colorMapping: [
+                        colorAssignment: [
                             {
-                                id: 'Red',
+                                predicate: (headerItem: Execution.IResultAttributeHeaderItem) =>
+                                    headerItem.attributeHeaderItem && (headerItem.attributeHeaderItem.name
+                                        === 'Red'),
                                 color: {
                                     type: 'guid',
                                     value: '03'
                                 }
                             }, {
-                                id: 'Purple',
+                                predicate: (headerItem: Execution.IResultAttributeHeaderItem) =>
+                                    headerItem.attributeHeaderItem && (headerItem.attributeHeaderItem.name
+                                        === 'Purple'),
                                 color: {
                                     type: 'guid',
                                     value: '02'
                                 }
                             }, {
-                                id: 'Pink',
+                                predicate: (headerItem: Execution.IResultAttributeHeaderItem) =>
+                                    headerItem.attributeHeaderItem && (headerItem.attributeHeaderItem.name
+                                        === 'Pink'),
                                 color: {
                                     type: 'rgb' as RGBType,
                                     value: {

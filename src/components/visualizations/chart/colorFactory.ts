@@ -13,7 +13,8 @@ import {
     isHeatmap,
     isOneOfTypes,
     isTreemap,
-    isScatterPlot
+    isScatterPlot,
+    isBubbleChart
 } from '../utils/common';
 
 import { VisualizationTypes } from '../../../constants/visualizationTypes';
@@ -230,6 +231,7 @@ function getAttributeColorMapping(
                 value: colorPalette[currentColorPaletteIndex % colorPalette.length].guid
             };
         currentColorPaletteIndex++;
+        // console.log('asdf', headerItem, color);
 
         return {
             headerItem,
@@ -362,16 +364,13 @@ export class TreemapColorStrategy extends MeasureColorStrategy {
     }
 }
 
-export class ScatterPlotColorStrategy extends MeasureColorStrategy {
-    protected createColorMapping(
+export class PointsChartColorStrategy extends AttributeColorStrategy {
+    protected singleMeasureColorMapping(
         colorPalette: IColorPalette,
         colorAssignment: IColorAssignment[],
-        measureGroup: MeasureGroupType,
-        _viewByAttribute: any,
-        _stackByAttribute: any,
-        _afm: AFM.IAfm
+        measureGroup: MeasureGroupType
     ): IColorMap[] {
-        const measureHeaderItem = measureGroup.items[0];
+        const measureHeaderItem = measureGroup.items[0] ? measureGroup.items[0] : measureGroup.items[1];
         const colorMapping = getColorFromMapping(measureHeaderItem, colorAssignment);
         const color: IColorItem = colorMapping ? colorMapping : { type: 'guid', value: colorPalette[0].guid };
         return [{
@@ -380,15 +379,66 @@ export class ScatterPlotColorStrategy extends MeasureColorStrategy {
         }];
     }
 
-    protected createPalette(colorPalette: IColorPalette, colorMapping: IColorMap[], viewByAttribute: any): string[] {
+    protected createSingleColorPalette(
+            colorPalette: IColorPalette, colorMapping: IColorMap[], viewByAttribute: any
+        ): string[] {
         const length = viewByAttribute ? viewByAttribute.items.length : 1;
         const color = colorMapping[0].color.type === 'guid'
             ? getColorByGuid(colorPalette, colorMapping[0].color.value as string)
             : colorMapping[0].color.value as IRGBColor;
-        return range(length).map(() => {
-            return getRgbStringFromRGB(color);
-        });
+        const colorString = getRgbStringFromRGB(color);
+        return Array(length).fill(colorString);
     }
+}
+
+export class BubbleChartColorStrategy extends PointsChartColorStrategy {
+    protected createColorMapping(
+        colorPalette: IColorPalette,
+        colorAssignment: IColorAssignment[],
+        measureGroup: MeasureGroupType,
+        viewByAttribute: any,
+        stackByAttribute: any,
+        afm: AFM.IAfm
+    ): IColorMap[] {
+        // console.log('fa', stackByAttribute);
+        if (stackByAttribute) {
+            return super.createColorMapping(
+                colorPalette,
+                colorAssignment,
+                measureGroup,
+                viewByAttribute,
+                stackByAttribute,
+                afm
+            );
+        }
+        return this.singleMeasureColorMapping(colorPalette, colorAssignment, measureGroup);
+    }
+
+    protected createPalette(colorPalette: IColorPalette, colorMapping: IColorMap[], viewByAttribute: any): string[] {
+        if (viewByAttribute) {
+            return super.createPalette(colorPalette, colorMapping, viewByAttribute);
+        }
+
+        return super.createSingleColorPalette(colorPalette, colorMapping, viewByAttribute);
+    }
+}
+
+export class ScatterPlotColorStrategy extends PointsChartColorStrategy {
+    protected createColorMapping(
+        colorPalette: IColorPalette,
+        colorAssignment: IColorAssignment[],
+        measureGroup: MeasureGroupType,
+        _viewByAttribute: any,
+        _stackByAttribute: any,
+        _afm: AFM.IAfm
+    ): IColorMap[] {
+        return this.singleMeasureColorMapping(colorPalette, colorAssignment, measureGroup);
+    }
+
+    protected createPalette(colorPalette: IColorPalette, colorMapping: IColorMap[], viewByAttribute: any): string[] {
+        return super.createSingleColorPalette(colorPalette, colorMapping, viewByAttribute);
+    }
+
 }
 
 export function isAttributeColorPalette(type: string, afm: AFM.IAfm, stackByAttribute: any) {
@@ -429,6 +479,16 @@ export class ColorFactory {
 
         if (isScatterPlot(type)) {
             return new ScatterPlotColorStrategy(
+                colorPalette,
+                colorAssignment,
+                measureGroup,
+                viewByAttribute,
+                stackByAttribute,
+                afm);
+        }
+
+        if (isBubbleChart(type)) {
+            return new BubbleChartColorStrategy(
                 colorPalette,
                 colorAssignment,
                 measureGroup,

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { AFM } from '@gooddata/typings';
+import { AFM, Execution } from '@gooddata/typings';
 import { screenshotWrap } from '@gooddata/test-storybook';
 
 import { Visualization, IVisualizationProps } from '../../src/components/uri/Visualization';
@@ -183,22 +183,26 @@ storiesOf('URI components', module)
         screenshotWrap(
             <div style={{ width: 800, height: 400 }}>
                 <Visualization
-                    projectId="myproject"
-                    uri={'/gdc/md/myproject/obj/1003'}
+                    projectId="storybook"
+                    uri={'/gdc/md/storybook/obj/1003'}
                     onError={onErrorHandler}
                     locale="en-US"
                     LoadingComponent={null}
                     ErrorComponent={null}
                     config={{
-                        colorMapping: [
+                        colorAssignment: [
                             {
-                                id: 'm1',
+                                predicate: (headerItem: Execution.IMeasureHeaderItem) =>
+                                    headerItem.measureHeaderItem && (headerItem.measureHeaderItem.localIdentifier
+                                        === 'm1'),
                                 color: {
                                     type: 'guid',
                                     value: 'purple'
                                 }
                             }, {
-                                id: 'm2',
+                                predicate: (headerItem: Execution.IMeasureHeaderItem) =>
+                                    headerItem.measureHeaderItem && (headerItem.measureHeaderItem.localIdentifier
+                                        === 'm3'),
                                 color: {
                                     type: 'guid',
                                     value: 'blue-dark'
