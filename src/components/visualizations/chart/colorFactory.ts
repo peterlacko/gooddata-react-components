@@ -444,10 +444,14 @@ export class ScatterPlotColorStrategy extends PointsChartColorStrategy {
         return this.singleMeasureColorMapping(colorPalette, colorAssignment, measureGroup);
     }
 
-    protected createPalette(colorPalette: IColorPalette, colorMapping: IColorMap[], viewByAttribute: any): string[] {
-        return super.createSingleColorPalette(colorPalette, colorMapping, viewByAttribute);
+    protected createPalette(
+            colorPalette: IColorPalette,
+            colorMapping: IColorMap[],
+            _viewByAttribute: any,
+            stackByAttribute: any
+        ): string[] {
+        return super.createSingleColorPalette(colorPalette, colorMapping, stackByAttribute);
     }
-
 }
 
 export function isAttributeColorPalette(type: string, afm: AFM.IAfm, stackByAttribute: any) {

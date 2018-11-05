@@ -4,6 +4,8 @@ import {
     MeasureColorStrategy,
     AttributeColorStrategy,
     HeatmapColorStrategy,
+    BubbleChartColorStrategy,
+    ScatterPlotColorStrategy,
     ColorFactory,
     IColorStrategy
 } from '../colorFactory';
@@ -25,6 +27,7 @@ import {
     IColorAssignment
 } from '../Chart';
 import { Execution } from '@gooddata/typings';
+import range = require('lodash/range');
 
 function getColorsFromStrategy(strategy: IColorStrategy): string[] {
     const res: string[] = [];
@@ -555,6 +558,125 @@ describe('ColorFactory', () => {
             [0, 1, 2, 3, 4, 5, 6].map((colorIndex: number) =>
                 expect(colorStrategy.getColorByIndex(colorIndex)).toEqual(expectedColors[colorIndex])
             );
+        });
+    });
+
+    describe('BubbleChartStrategy', () => {
+        it('shouls create palette with color from first measure', () => {
+            const [measureGroup, viewByAttribute, stackByAttribute] =
+                getMVS(fixtures.bubbleChartWith3Metrics);
+            const { afm } = fixtures.bubbleChartWith3Metrics.executionRequest;
+            const type = 'bubble';
+
+            const expectedColors = ['rgb(0,0,0)'];
+            const colorAssignment: IColorAssignment[] = [
+                {
+                    predicate: (headerItem: Execution.IMeasureHeaderItem) =>
+                        headerItem.measureHeaderItem.localIdentifier === '784a5018a51049078e8f7e86247e08a3',
+                    color: {
+                        type: 'rgb',
+                        value: {
+                            r: 0,
+                            g: 0,
+                            b: 0
+                        }
+                    }
+                }
+            ];
+
+            const colorStrategy = ColorFactory.getColorStrategy(
+                CUSTOM_COLOR_PALETTE,
+                colorAssignment,
+                measureGroup,
+                viewByAttribute,
+                stackByAttribute,
+                afm,
+                type
+            );
+
+            expect(colorStrategy).toBeInstanceOf(BubbleChartColorStrategy);
+            expect(colorStrategy.getColorMapping().length).toEqual(1);
+            expect(colorStrategy.getColorByIndex(0)).toEqual(expectedColors[0]);
+        });
+
+        it('should create palette with color for each attribute element', () => {
+            const [measureGroup, viewByAttribute, stackByAttribute] =
+                getMVS(fixtures.bubbleChartWith3MetricsAndAttribute);
+            const { afm } = fixtures.bubbleChartWith3MetricsAndAttribute.executionRequest;
+            const type = 'bubble';
+
+            const expectedColors = ['rgb(0,0,0)'];
+            const colorAssignment: IColorAssignment[] = [
+                {
+                    predicate: (headerItem: Execution.IResultAttributeHeaderItem) =>
+                        headerItem.attributeHeaderItem.uri
+                            === '/gdc/md/hzyl5wlh8rnu0ixmbzlaqpzf09ttb7c8/obj/1025/elements?id=1224',
+                    color: {
+                        type: 'rgb',
+                        value: {
+                            r: 0,
+                            g: 0,
+                            b: 0
+                        }
+                    }
+                }
+            ];
+
+            const colorStrategy = ColorFactory.getColorStrategy(
+                CUSTOM_COLOR_PALETTE,
+                colorAssignment,
+                measureGroup,
+                viewByAttribute,
+                stackByAttribute,
+                afm,
+                type
+            );
+
+            expect(colorStrategy).toBeInstanceOf(BubbleChartColorStrategy);
+            expect(colorStrategy.getColorMapping().length).toEqual(20);
+            expect(colorStrategy.getColorByIndex(0)).toEqual(expectedColors[0]);
+        });
+    });
+
+    describe('ScatterPlotColorStrategy', () => {
+        it('should create palette with same color from first measure for all attribute elements', () => {
+            const [measureGroup, viewByAttribute, stackByAttribute] =
+                getMVS(fixtures.scatterPlotWith2MetricsAndAttribute);
+            const { afm } = fixtures.scatterPlotWith2MetricsAndAttribute.executionRequest;
+            const type = 'scatter';
+
+            const expectedColor = 'rgb(0,0,0)';
+            const colorAssignment: IColorAssignment[] = [
+                {
+                    predicate: (headerItem: Execution.IMeasureHeaderItem) =>
+                        headerItem.measureHeaderItem.localIdentifier
+                            === '33bd337ed5534fd383861f11ff657b23',
+                    color: {
+                        type: 'rgb',
+                        value: {
+                            r: 0,
+                            g: 0,
+                            b: 0
+                        }
+                    }
+                }
+            ];
+
+            const colorStrategy = ColorFactory.getColorStrategy(
+                CUSTOM_COLOR_PALETTE,
+                colorAssignment,
+                measureGroup,
+                viewByAttribute,
+                stackByAttribute,
+                afm,
+                type
+            );
+
+            expect(colorStrategy).toBeInstanceOf(ScatterPlotColorStrategy);
+            expect(colorStrategy.getColorMapping().length).toEqual(1);
+            range(6).map((itemIndex) => {
+                expect(colorStrategy.getColorByIndex(itemIndex)).toEqual(expectedColor);
+            });
         });
     });
 });
