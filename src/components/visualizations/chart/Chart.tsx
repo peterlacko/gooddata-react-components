@@ -64,12 +64,12 @@ export type IMappingHeader = Execution.IResultAttributeHeaderItem | Execution.IM
 
 export type ColorAssignmentPredicate = (mappingHeader: IMappingHeader) => boolean;
 
-export interface IColorAssignment { // < send to SDK
+export interface IColorAssignment {
     predicate: ColorAssignmentPredicate;
     color: IColorItem;
 }
 
-export interface IColorMap { // send from SDK using pushData
+export interface IColorMap {
     headerItem: IMappingHeader;
     color: IColorItem;
 }

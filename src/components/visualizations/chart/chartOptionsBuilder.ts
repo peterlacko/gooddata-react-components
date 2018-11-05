@@ -1447,6 +1447,9 @@ export function getChartOptions(
         series[0].data = sortedDataPoints;
     }
 
+    const colorMapping = colorStrategy.getColorMapping();
+    const { colorPalette } = config;
+
     if (isComboChart(type)) {
         return {
             type,
@@ -1467,8 +1470,8 @@ export function getChartOptions(
                 series,
                 categories
             ),
-            colorMapping: colorStrategy.getColorMapping(),
-            colorPalette: config.colorPalette
+            colorMapping,
+            colorPalette
         };
     }
 
@@ -1504,8 +1507,8 @@ export function getChartOptions(
             },
             xAxisProps,
             yAxisProps,
-            colorMapping: colorStrategy.getColorMapping(),
-            colorPalette: config.colorPalette
+            colorMapping,
+            colorPalette
         };
     }
 
@@ -1537,8 +1540,8 @@ export function getChartOptions(
             },
             xAxisProps,
             yAxisProps,
-            colorMapping: colorStrategy.getColorMapping(),
-            colorPalette: config.colorPalette
+            colorMapping,
+            colorPalette
         };
     }
 
@@ -1584,8 +1587,8 @@ export function getChartOptions(
             },
             xAxisProps,
             yAxisProps,
-            colorMapping: colorStrategy.getColorMapping(),
-            colorPalette: config.colorPalette
+            colorMapping,
+            colorPalette
         };
     }
 
@@ -1614,8 +1617,8 @@ export function getChartOptions(
         },
         xAxisProps,
         yAxisProps,
-        colorMapping: colorStrategy.getColorMapping(),
-        colorPalette: config.colorPalette
+        colorMapping,
+        colorPalette
     };
 
     return chartOptions;

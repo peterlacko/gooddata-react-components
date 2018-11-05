@@ -22,6 +22,7 @@ import {
     DATA_LABELS_AUTO_CONFIG,
     CUSTOM_COLOR_PALETTE_CONFIG
 } from '../data/configProps';
+import { Execution } from '@gooddata/typings';
 
 const wrapperStyle = { width: 800, height: 400 };
 const wrapperWiderStyle = { width: 1000, height: 400 };
@@ -343,17 +344,19 @@ storiesOf('Core components/Heatmap', module)
                     onError={onErrorHandler}
                     LoadingComponent={null}
                     ErrorComponent={null}
-                    // config={{
-                    //     colorMapping: [
-                    //         {
-                    //             id: 'm1',
-                    //             color: {
-                    //                 type: 'guid',
-                    //                 value: 'green'
-                    //             }
-                    //         }
-                    //     ]
-                    // }}
+                    config={{
+                        colorAssignment: [
+                            {
+                                predicate: (headerItem: Execution.IMeasureHeaderItem) =>
+                                    headerItem.measureHeaderItem && (headerItem.measureHeaderItem.localIdentifier
+                                        === 'm1'),
+                                color: {
+                                    type: 'guid',
+                                    value: 'green'
+                                }
+                            }
+                        ]
+                    }}
                 />
             </div>
         )

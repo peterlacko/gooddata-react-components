@@ -236,7 +236,6 @@ function getAttributeColorMapping(
                 value: colorPalette[currentColorPaletteIndex % colorPalette.length].guid
             };
         currentColorPaletteIndex++;
-        // console.log('asdf', headerItem, color);
 
         return {
             headerItem,
