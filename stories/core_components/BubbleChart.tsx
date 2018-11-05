@@ -120,19 +120,6 @@ storiesOf('Core components/BubbleChart', module)
                     size={MEASURE_3}
                     viewBy={ATTRIBUTE_1}
                     config={{
-                        // colorAssignment: [{
-                        //     predicate: (headerItem: Execution.IMeasureHeaderItem) =>
-                        //         headerItem.measureHeaderItem && (headerItem.measureHeaderItem.localIdentifier
-                        //             === 'm1'),
-                        //     color: {
-                        //         type: 'rgb',
-                        //         value: {
-                        //             r: 0,
-                        //             g: 0,
-                        //             b: 0
-                        //         }
-                        //     }}
-                        // ]
                         colorAssignment: [{
                             predicate: (headerItem: Execution.IResultAttributeHeaderItem) =>
                                 headerItem.attributeHeaderItem && (headerItem.attributeHeaderItem.name

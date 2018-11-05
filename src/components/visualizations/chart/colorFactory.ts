@@ -70,7 +70,8 @@ export abstract class ColorStrategy implements IColorStrategy {
             afm
         );
 
-        this.palette = this.createPalette(colorPalette, this.colorMapping, viewByAttribute);
+        this.palette = this.createPalette(colorPalette, this.colorMapping, viewByAttribute, stackByAttribute);
+        console.log('palette', this.palette);
     }
 
     public getColorByIndex(index: number): string {
@@ -81,7 +82,12 @@ export abstract class ColorStrategy implements IColorStrategy {
         return this.colorMapping;
     }
 
-    protected createPalette(colorPalette: IColorPalette, colorMapping: IColorMap[], _viewByAttribute: any): string[] {
+    protected createPalette(
+            colorPalette: IColorPalette,
+            colorMapping: IColorMap[],
+            _viewByAttribute: any,
+            _stackByAttribute: any):
+        string[] {
         return colorMapping.map((map) => {
             const color = map.color.type === 'guid'
                 ? getColorByGuid(colorPalette, map.color.value as string) : map.color.value as IRGBColor;
@@ -400,7 +406,6 @@ export class BubbleChartColorStrategy extends PointsChartColorStrategy {
         stackByAttribute: any,
         afm: AFM.IAfm
     ): IColorMap[] {
-        // console.log('fa', stackByAttribute);
         if (stackByAttribute) {
             return super.createColorMapping(
                 colorPalette,
@@ -414,12 +419,17 @@ export class BubbleChartColorStrategy extends PointsChartColorStrategy {
         return this.singleMeasureColorMapping(colorPalette, colorAssignment, measureGroup);
     }
 
-    protected createPalette(colorPalette: IColorPalette, colorMapping: IColorMap[], viewByAttribute: any): string[] {
-        if (viewByAttribute) {
-            return super.createPalette(colorPalette, colorMapping, viewByAttribute);
+    protected createPalette(
+            colorPalette: IColorPalette,
+            colorMapping: IColorMap[],
+            viewByAttribute: any,
+            stackByAttribute: any
+        ): string[] {
+        if (stackByAttribute) {
+            return super.createPalette(colorPalette, colorMapping, viewByAttribute, stackByAttribute);
         }
 
-        return super.createSingleColorPalette(colorPalette, colorMapping, viewByAttribute);
+        return super.createSingleColorPalette(colorPalette, colorMapping, stackByAttribute);
     }
 }
 
