@@ -22,7 +22,6 @@ import {
     DATA_LABELS_AUTO_CONFIG,
     CUSTOM_COLOR_PALETTE_CONFIG
 } from '../data/configProps';
-import { Execution } from '@gooddata/typings';
 import { getMeasureLocalIdentifierPredicate } from '../../src/helpers/predicatesFactory';
 
 const wrapperStyle = { width: 800, height: 400 };
