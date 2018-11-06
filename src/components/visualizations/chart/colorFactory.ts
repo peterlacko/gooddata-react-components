@@ -33,7 +33,7 @@ import {
     RGBType,
     IColorItem,
     IMappingHeader
-} from './Chart';
+} from '../../../interfaces/Config';
 
 export interface IColorStrategy {
     getColorByIndex(index: number): string;
@@ -116,8 +116,10 @@ function getColorFromMapping(mappingHeader: IMappingHeader, colorAssignment: ICo
         return mapping && mapping.color;
 }
 
-function getColorByGuid(colorPalette: IColorPalette, guid: string) {
-    return colorPalette.find(item => item.guid === guid).fill;
+export function getColorByGuid(colorPalette: any, guid: string) {
+    const inPalette = colorPalette.find((item: any) => item.guid === guid);
+
+    return inPalette ? inPalette.fill : null;
 }
 
 function getRgbStringFromRGB(color: IRGBColor) {

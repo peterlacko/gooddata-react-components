@@ -47,7 +47,7 @@ import {
     AttributeColorStrategy,
     HeatmapColorStrategy
 } from '../colorFactory';
-import { IColorPaletteItem } from '../Chart';
+import { IColorPaletteItem } from '../../../../interfaces/Config';
 
 export { IPoint };
 

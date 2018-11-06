@@ -25,7 +25,7 @@ import {
     IColorPaletteItem,
     RGBType,
     IColorAssignment
-} from '../Chart';
+} from '../../../../interfaces/Config';
 import { Execution } from '@gooddata/typings';
 import range = require('lodash/range');
 

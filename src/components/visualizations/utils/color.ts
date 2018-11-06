@@ -1,7 +1,7 @@
 // (C) 2007-2018 GoodData Corporation
 import isEmpty = require('lodash/isEmpty');
 import isEqual = require('lodash/isEqual');
-import { IColorPalette, IColorPaletteItem, IChartConfig, IRGBColor } from '../chart/Chart';
+import { IColorPalette, IColorPaletteItem, IChartConfig, IRGBColor } from '../../../interfaces/Config';
 
 export const WHITE = 'rgb(255, 255, 255)';
 export const BLACK = 'rgb(0, 0, 0)';

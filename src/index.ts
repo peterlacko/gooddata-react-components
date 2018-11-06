@@ -44,23 +44,20 @@ import { ScatterPlot } from './components/ScatterPlot';
 import { ComboChart } from './components/ComboChart';
 import { FunnelChart } from './components/FunnelChart';
 import { Heatmap } from './components/Heatmap';
-import Chart, {
+import {
     ILegendConfig,
     IChartConfig,
     IColorPalette,
-    IColorPaletteItem,
-    IColorAssignment,
-    IColorMap,
-    IRGBColor,
-    IGuidColorItem,
-    IRGBColorItem,
-    IMappingHeader,
-    ColorAssignmentPredicate
-} from './components/visualizations/chart/Chart';
+    IColorPaletteItem
+} from './interfaces/Config';
+// tslint:disable-next-line:no-duplicate-imports
+import * as ChartConfiguration from './interfaces/Config';
+import Chart from './components/visualizations/chart/Chart';
 import ChartTransformation from './components/visualizations/chart/ChartTransformation';
 import { RuntimeError } from './errors/RuntimeError';
 import { IMeasureTitleProps, IArithmeticMeasureTitleProps } from './interfaces/MeasureTitle';
 import { OverTimeComparisonType, OverTimeComparisonTypes } from './interfaces/OverTimeComparison';
+import { getColorByGuid } from './components/visualizations/chart/colorFactory';
 
 /**
  * CoreComponents
@@ -74,6 +71,10 @@ const CoreComponents = {
     PivotTable: CorePivotTable,
     ScatterPlot: CoreScatterPlot,
     FunnelChart: CoreFunnelChart
+};
+
+const gdUtils = {
+    getColorByGuid
 };
 
 export {
@@ -104,13 +105,6 @@ export {
     IChartConfig,
     IColorPalette,
     IColorPaletteItem,
-    IColorAssignment,
-    IColorMap,
-    IRGBColor,
-    IGuidColorItem,
-    IRGBColorItem,
-    IMappingHeader,
-    ColorAssignmentPredicate,
     IPushData,
     isEmptyResult,
     Kpi,
@@ -138,5 +132,7 @@ export {
     ChartTransformation,
     Chart,
     OverTimeComparisonType,
-    OverTimeComparisonTypes
+    OverTimeComparisonTypes,
+    ChartConfiguration,
+    gdUtils
 };

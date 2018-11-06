@@ -8,7 +8,7 @@ import { AFM, VisualizationObject, VisualizationClass, Localization } from '@goo
 import { injectIntl, intlShape, InjectedIntlProps } from 'react-intl';
 import { IntlWrapper } from '../core/base/IntlWrapper';
 import { BaseChart } from '../core/base/BaseChart';
-import { IChartConfig, IColorPaletteItem } from '../visualizations/chart/Chart';
+import { IChartConfig, IColorPaletteItem } from '../../interfaces/Config';
 import { SortableTable } from '../core/SortableTable';
 import { Headline } from '../core/Headline';
 import { IEvents, OnLegendReady } from '../../interfaces/Events';

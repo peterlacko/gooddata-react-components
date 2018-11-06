@@ -22,7 +22,7 @@ import {
     DATA_LABELS_AUTO_CONFIG,
     CUSTOM_COLOR_PALETTE_CONFIG
 } from '../data/configProps';
-import { RGBType } from '../../src/components/visualizations/chart/Chart';
+import { RGBType } from '../../src/interfaces/Config';
 
 const wrapperStyle = { width: 400, height: 400 };
 

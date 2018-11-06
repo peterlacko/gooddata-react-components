@@ -17,7 +17,6 @@ import range = require('lodash/range');
 import unescape = require('lodash/unescape');
 import without = require('lodash/without');
 
-import { IChartConfig, IChartLimits, IColorMap, IColorPalette } from './Chart';
 import {
     getAttributeElementIdFromAttributeElementUri,
     isAreaChart,
@@ -56,6 +55,8 @@ import { getComboChartOptions } from './chartOptions/comboChartOptions';
 import { IDrillableItem } from '../../../interfaces/DrillEvents';
 
 import { ColorFactory, IColorStrategy } from './colorFactory';
+import { IColorMap, IChartLimits, IChartConfig } from '../../../interfaces/Config';
+import { IColorPalette } from '@gooddata/gooddata-js';
 
 const enableAreaChartStacking = (stacking: any) => {
     return stacking || isUndefined(stacking);

@@ -20,7 +20,7 @@ import {
 } from '../data/componentProps';
 import { GERMAN_SEPARATORS } from '../data/numberFormat';
 import { CUSTOM_COLOR_PALETTE_CONFIG } from '../data/configProps';
-import { RGBType } from '../../src/components/visualizations/chart/Chart';
+import { RGBType } from '../../src/interfaces/Config';
 import { Execution } from '@gooddata/typings';
 
 const wrapperStyle = { width: 800, height: 400 };

@@ -16,9 +16,8 @@ import * as numberJS from '@gooddata/numberjs';
 
 import { styleVariables } from '../../styles/variables';
 import { IAxis, IChartOptions } from '../chartOptionsBuilder';
-import { IChartConfig } from '../Chart';
 import { VisualizationTypes, ChartType } from '../../../../constants/visualizationTypes';
-import { IDataLabelsVisibile } from '../../../../interfaces/Config';
+import { IDataLabelsVisibile, IChartConfig } from '../../../../interfaces/Config';
 import { getShapeVisiblePart } from '../highcharts/dataLabelsHelpers';
 import { HOVER_BRIGHTNESS, MINIMUM_HC_SAFE_BRIGHTNESS } from './commonConfiguration';
 import {
