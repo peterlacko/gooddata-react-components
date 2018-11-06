@@ -22,6 +22,7 @@ import { GERMAN_SEPARATORS } from '../data/numberFormat';
 import { CUSTOM_COLOR_PALETTE_CONFIG } from '../data/configProps';
 import { RGBType } from '../../src/interfaces/Config';
 import { Execution } from '@gooddata/typings';
+import { getAttributeItemNamePredicate } from '../../src/helpers/predicatesFactory';
 
 const wrapperStyle = { width: 800, height: 400 };
 
@@ -390,25 +391,19 @@ storiesOf('Core components/BarChart', module)
                         ...CUSTOM_COLOR_PALETTE_CONFIG,
                         colorAssignment: [
                             {
-                                predicate: (headerItem: Execution.IResultAttributeHeaderItem) =>
-                                    headerItem.attributeHeaderItem && (headerItem.attributeHeaderItem.name
-                                        === 'Red'),
+                                predicate: getAttributeItemNamePredicate('Red'),
                                 color: {
                                     type: 'guid',
                                     value: '03'
                                 }
                             }, {
-                                predicate: (headerItem: Execution.IResultAttributeHeaderItem) =>
-                                    headerItem.attributeHeaderItem && (headerItem.attributeHeaderItem.name
-                                        === 'Purple'),
+                                predicate: getAttributeItemNamePredicate('Purple'),
                                 color: {
                                     type: 'guid',
                                     value: '02'
                                 }
                             }, {
-                                predicate: (headerItem: Execution.IResultAttributeHeaderItem) =>
-                                    headerItem.attributeHeaderItem && (headerItem.attributeHeaderItem.name
-                                        === 'Pink'),
+                                predicate: getAttributeItemNamePredicate('Pink'),
                                 color: {
                                     type: 'rgb' as RGBType,
                                     value: {

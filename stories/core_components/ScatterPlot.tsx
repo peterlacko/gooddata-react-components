@@ -19,7 +19,7 @@ import {
     DATA_LABELS_HIDDEN_CONFIG,
     DATA_LABELS_AUTO_CONFIG
 } from '../data/configProps';
-import { Execution } from '@gooddata/typings';
+import { getMeasureLocalIdentifierPredicate } from '../../src/helpers/predicatesFactory';
 
 const wrapperStyle = { width: 800, height: 400 };
 
@@ -141,9 +141,7 @@ storiesOf('Core components/ScatterPlot', module)
                     ErrorComponent={null}
                     config={{
                         colorAssignment: [{
-                            predicate: (headerItem: Execution.IMeasureHeaderItem) =>
-                                headerItem.measureHeaderItem && (headerItem.measureHeaderItem.localIdentifier
-                                    === 'm2'),
+                            predicate: getMeasureLocalIdentifierPredicate('m2'),
                             color: {
                                 type: 'rgb',
                                 value: {

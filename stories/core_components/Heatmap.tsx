@@ -23,6 +23,7 @@ import {
     CUSTOM_COLOR_PALETTE_CONFIG
 } from '../data/configProps';
 import { Execution } from '@gooddata/typings';
+import { getMeasureLocalIdentifierPredicate } from '../../src/helpers/predicatesFactory';
 
 const wrapperStyle = { width: 800, height: 400 };
 const wrapperWiderStyle = { width: 1000, height: 400 };
@@ -347,9 +348,7 @@ storiesOf('Core components/Heatmap', module)
                     config={{
                         colorAssignment: [
                             {
-                                predicate: (headerItem: Execution.IMeasureHeaderItem) =>
-                                    headerItem.measureHeaderItem && (headerItem.measureHeaderItem.localIdentifier
-                                        === 'm1'),
+                                predicate: getMeasureLocalIdentifierPredicate('m1'),
                                 color: {
                                     type: 'guid',
                                     value: 'green'

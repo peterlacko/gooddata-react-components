@@ -20,7 +20,7 @@ import {
     DATA_LABELS_HIDDEN_CONFIG,
     DATA_LABELS_AUTO_CONFIG
 } from '../data/configProps';
-import { Execution } from '@gooddata/typings';
+import { getAttributeItemNamePredicate } from '../../src/helpers/predicatesFactory';
 const wrapperStyle = { width: 800, height: 400 };
 
 storiesOf('Core components/BubbleChart', module)
@@ -121,9 +121,7 @@ storiesOf('Core components/BubbleChart', module)
                     viewBy={ATTRIBUTE_1}
                     config={{
                         colorAssignment: [{
-                            predicate: (headerItem: Execution.IResultAttributeHeaderItem) =>
-                                headerItem.attributeHeaderItem && (headerItem.attributeHeaderItem.name
-                                    === 'Pink'),
+                            predicate: getAttributeItemNamePredicate('Pink'),
                             color: {
                                 type: 'rgb',
                                 value: {
