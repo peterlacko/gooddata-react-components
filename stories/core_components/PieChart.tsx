@@ -23,6 +23,7 @@ import {
     CUSTOM_COLOR_PALETTE_CONFIG
 } from '../data/configProps';
 import { RGBType } from '../../src/interfaces/Config';
+import { Execution } from '@gooddata/typings';
 
 const wrapperStyle = { width: 400, height: 400 };
 
@@ -288,21 +289,27 @@ storiesOf('Core components/PieChart', module)
                     ErrorComponent={null}
                     config={{
                         ...CUSTOM_COLOR_PALETTE_CONFIG,
-                        colorMapping: [
+                        colorAssignment: [
                             {
-                                id: 'Red',
+                                predicate: (headerItem: Execution.IResultAttributeHeaderItem) =>
+                                    headerItem.attributeHeaderItem && (headerItem.attributeHeaderItem.name
+                                        === 'Red'),
                                 color: {
                                     type: 'guid',
                                     value: '03'
                                 }
                             }, {
-                                id: 'Purple',
+                                predicate: (headerItem: Execution.IResultAttributeHeaderItem) =>
+                                    headerItem.attributeHeaderItem && (headerItem.attributeHeaderItem.name
+                                        === 'Purple'),
                                 color: {
                                     type: 'guid',
                                     value: '02'
                                 }
                             }, {
-                                id: 'Pink',
+                                predicate: (headerItem: Execution.IResultAttributeHeaderItem) =>
+                                    headerItem.attributeHeaderItem && (headerItem.attributeHeaderItem.name
+                                        === 'Pink'),
                                 color: {
                                     type: 'rgb' as RGBType,
                                     value: {

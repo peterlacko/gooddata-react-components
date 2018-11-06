@@ -5,6 +5,8 @@ import { VisType } from '../constants/visualizationTypes';
 import { IDataLabelsConfig } from '../interfaces/Config';
 import { PositionType } from '../components/visualizations/typings/legend';
 
+export { DEFAULT_COLOR_PALETTE } from '../components/visualizations/utils/color';
+
 export type IDataLabelsVisibile = string | boolean;
 
 export interface IDataLabelsConfig {
