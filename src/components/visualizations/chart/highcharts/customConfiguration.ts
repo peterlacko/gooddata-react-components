@@ -811,7 +811,7 @@ function getHoverStyles({ type }: any, config: any) {
                 VisualizationTypes.AREA,
                 VisualizationTypes.SCATTER,
                 VisualizationTypes.BUBBLE
-            ].reduce((conf, key) => ({
+            ].reduce((conf: object, key) => ({
                 ...conf,
                 [key]: {
                     point: {
