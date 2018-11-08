@@ -24,6 +24,7 @@ import { ErrorComponent, IErrorProps } from '../simple/ErrorComponent';
 import { IDrillableItem, generateDimensions, RuntimeError } from '../../';
 import { setTelemetryHeaders } from '../../helpers/utils';
 import { convertErrors, generateErrorMap, IErrorMap } from '../../helpers/errorHandlers';
+import { getUniversalPredicate } from '../../helpers/predicatesFactory';
 export { Requireable };
 
 const {
@@ -279,14 +280,21 @@ export class VisualizationWrapped
             ? this.props.config.colorPalette
             : this.state.colorPalette;
 
-        // if (properties.colorMapping) {
-        //     const colorMapping = properties.colorMapping.map((mapping: any) => {
-        //         const predicate = getUniversalPredicate(mapping);
-        //     })
-        // }
+        let colorMapping = {};
+        if (properties.colorMapping) {
+            const { references } = properties;
+            colorMapping = properties.colorMapping.map((mapping: any) => {
+                const predicate = getUniversalPredicate(mapping.id, references);
+                return {
+                    predicate,
+                    color: mapping.color
+                };
+            });
+        }
 
         const finalConfig = {
             ...properties,
+            colorMapping,
             ...config,
             colorPalette,
             mdObject: mdObjectContent

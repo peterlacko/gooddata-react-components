@@ -64,3 +64,14 @@ export function getPredicateFromReferences2(id: string) {
         return uri === headerItem.attributeHeaderItem.uri;
     };
 }
+
+export function getUniversalPredicate(id: string, references: any) {
+    return (headerItem: IMappingHeader) => {
+        const attributeItemUri = references[id];
+        if (attributeItemUri && isAttributeHeader(headerItem)) {
+            return attributeItemUri === headerItem.attributeHeaderItem.uri;
+        }
+
+        return isMeasureHeader(headerItem) && headerItem.measureHeaderItem.localIdentifier === id;
+    };
+}
