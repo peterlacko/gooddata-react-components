@@ -279,6 +279,12 @@ export class VisualizationWrapped
             ? this.props.config.colorPalette
             : this.state.colorPalette;
 
+        // if (properties.colorMapping) {
+        //     const colorMapping = properties.colorMapping.map((mapping: any) => {
+        //         const predicate = getUniversalPredicate(mapping);
+        //     })
+        // }
+
         const finalConfig = {
             ...properties,
             ...config,
