@@ -1,6 +1,6 @@
 // (C) 2007-2018 GoodData Corporation
 import { AFM, Execution, VisualizationObject } from '@gooddata/typings';
-import { IColorMap, IColorPalette } from './Config';
+import { IColorAssignment, IColorPalette } from './Config';
 
 export interface IPushData {
     result?: Execution.IExecutionResponses;
@@ -10,7 +10,7 @@ export interface IPushData {
     };
     propertiesMeta?: any;
     colors?: {
-        colorMapping: IColorMap[];
+        colorMapping: IColorAssignment[];
         colorPalette: IColorPalette;
     };
 }

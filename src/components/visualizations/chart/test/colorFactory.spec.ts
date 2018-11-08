@@ -24,7 +24,7 @@ import {
     IColorPalette,
     IColorPaletteItem,
     RGBType,
-    IColorAssignment
+    IColorMapping
 } from '../../../../interfaces/Config';
 import { Execution } from '@gooddata/typings';
 import range = require('lodash/range');
@@ -178,7 +178,7 @@ describe('ColorFactory', () => {
                     b: 255
                 }
             }];
-            const colorAssignment: IColorAssignment[] = [
+            const colorMapping: IColorMapping[] = [
                 {
                     predicate: (headerItem: Execution.IResultAttributeHeaderItem) =>
                         headerItem.attributeHeaderItem && (headerItem.attributeHeaderItem.uri
@@ -216,7 +216,7 @@ describe('ColorFactory', () => {
 
             const colorStrategy = ColorFactory.getColorStrategy(
                 colorPalette,
-                colorAssignment,
+                colorMapping,
                 measureGroup,
                 viewByAttribute,
                 stackByAttribute,
@@ -353,7 +353,7 @@ describe('ColorFactory', () => {
                 getMVS(fixtures.barChartWith6PopMeasuresAndViewByAttribute);
             const { afm } = fixtures.barChartWith6PopMeasuresAndViewByAttribute.executionRequest;
             const type = 'column';
-            const colorAssignment: IColorAssignment[] = [
+            const colorMapping: IColorMapping[] = [
                 {
                     predicate: (headerItem: Execution.IMeasureHeaderItem) =>
                         headerItem.measureHeaderItem.localIdentifier === 'amountMeasure_0',
@@ -380,7 +380,7 @@ describe('ColorFactory', () => {
 
             const colorStrategy = ColorFactory.getColorStrategy(
                 customPalette,
-                colorAssignment,
+                colorMapping,
                 measureGroup,
                 viewByAttribute,
                 stackByAttribute,
@@ -432,7 +432,7 @@ describe('ColorFactory', () => {
             const { afm } = fixtures.treemapWithMetricViewByAndStackByAttribute.executionRequest;
             const type = 'treemap';
 
-            const colorAssignment: IColorAssignment[] = [
+            const colorMapping: IColorMapping[] = [
                 {
                     predicate: (headerItem: Execution.IMeasureHeaderItem) =>
                         headerItem.measureHeaderItem.localIdentifier === 'amountMetric',
@@ -445,7 +445,7 @@ describe('ColorFactory', () => {
 
             const colorStrategy = ColorFactory.getColorStrategy(
                 customPalette,
-                colorAssignment,
+                colorMapping,
                 measureGroup,
                 viewByAttribute,
                 stackByAttribute,
@@ -533,7 +533,7 @@ describe('ColorFactory', () => {
                 'rgb(182,204,114)',
                 'rgb(168,194,86)'
             ];
-            const colorAssignment: IColorAssignment[] = [
+            const colorMapping: IColorMapping[] = [
                 {
                     predicate: (headerItem: Execution.IMeasureHeaderItem) =>
                         headerItem.measureHeaderItem.localIdentifier === 'amountMeasure',
@@ -546,7 +546,7 @@ describe('ColorFactory', () => {
 
             const colorStrategy = ColorFactory.getColorStrategy(
                 CUSTOM_COLOR_PALETTE,
-                colorAssignment,
+                colorMapping,
                 measureGroup,
                 viewByAttribute,
                 stackByAttribute,
@@ -569,7 +569,7 @@ describe('ColorFactory', () => {
             const type = 'bubble';
 
             const expectedColors = ['rgb(0,0,0)'];
-            const colorAssignment: IColorAssignment[] = [
+            const colorMapping: IColorMapping[] = [
                 {
                     predicate: (headerItem: Execution.IMeasureHeaderItem) =>
                         headerItem.measureHeaderItem.localIdentifier === '784a5018a51049078e8f7e86247e08a3',
@@ -586,7 +586,7 @@ describe('ColorFactory', () => {
 
             const colorStrategy = ColorFactory.getColorStrategy(
                 CUSTOM_COLOR_PALETTE,
-                colorAssignment,
+                colorMapping,
                 measureGroup,
                 viewByAttribute,
                 stackByAttribute,
@@ -606,7 +606,7 @@ describe('ColorFactory', () => {
             const type = 'bubble';
 
             const expectedColors = ['rgb(0,0,0)'];
-            const colorAssignment: IColorAssignment[] = [
+            const colorMapping: IColorMapping[] = [
                 {
                     predicate: (headerItem: Execution.IResultAttributeHeaderItem) =>
                         headerItem.attributeHeaderItem.uri
@@ -624,7 +624,7 @@ describe('ColorFactory', () => {
 
             const colorStrategy = ColorFactory.getColorStrategy(
                 CUSTOM_COLOR_PALETTE,
-                colorAssignment,
+                colorMapping,
                 measureGroup,
                 viewByAttribute,
                 stackByAttribute,
@@ -646,7 +646,7 @@ describe('ColorFactory', () => {
             const type = 'scatter';
 
             const expectedColor = 'rgb(0,0,0)';
-            const colorAssignment: IColorAssignment[] = [
+            const colorMapping: IColorMapping[] = [
                 {
                     predicate: (headerItem: Execution.IMeasureHeaderItem) =>
                         headerItem.measureHeaderItem.localIdentifier
@@ -664,7 +664,7 @@ describe('ColorFactory', () => {
 
             const colorStrategy = ColorFactory.getColorStrategy(
                 CUSTOM_COLOR_PALETTE,
-                colorAssignment,
+                colorMapping,
                 measureGroup,
                 viewByAttribute,
                 stackByAttribute,

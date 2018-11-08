@@ -140,7 +140,7 @@ storiesOf('Core components/ScatterPlot', module)
                     LoadingComponent={null}
                     ErrorComponent={null}
                     config={{
-                        colorAssignment: [{
+                        colorMapping: [{
                             predicate: getMeasureLocalIdentifierPredicate('m2'),
                             color: {
                                 type: 'rgb',

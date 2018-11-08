@@ -209,7 +209,7 @@ storiesOf('URI components', module)
                     LoadingComponent={null}
                     ErrorComponent={null}
                     config={{
-                        colorAssignment: [
+                        colorMapping: [
                             {
                                 predicate: (headerItem: Execution.IMeasureHeaderItem) =>
                                     headerItem.measureHeaderItem && (headerItem.measureHeaderItem.localIdentifier

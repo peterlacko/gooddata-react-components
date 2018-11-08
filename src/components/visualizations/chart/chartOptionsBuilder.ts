@@ -55,7 +55,7 @@ import { getComboChartOptions } from './chartOptions/comboChartOptions';
 import { IDrillableItem } from '../../../interfaces/DrillEvents';
 
 import { ColorFactory, IColorStrategy } from './colorFactory';
-import { IColorMap, IChartLimits, IChartConfig } from '../../../interfaces/Config';
+import { IColorAssignment, IChartLimits, IChartConfig } from '../../../interfaces/Config';
 import { IColorPalette } from '@gooddata/gooddata-js';
 
 const enableAreaChartStacking = (stacking: any) => {
@@ -128,7 +128,7 @@ export interface IChartOptions {
     yAxisProps?: any;
     title?: any;
     colorAxis?: Highcharts.ColorAxisOptions;
-    colorMapping?: IColorMap[];
+    colorMapping?: IColorAssignment[];
     colorPalette?: IColorPalette;
 }
 
@@ -1387,7 +1387,7 @@ export function getChartOptions(
 
     const colorStrategy = ColorFactory.getColorStrategy(
         config.colorPalette,
-        config.colorAssignment,
+        config.colorMapping,
         measureGroup,
         viewByAttribute,
         stackByAttribute,

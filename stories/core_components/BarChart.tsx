@@ -340,7 +340,7 @@ storiesOf('Core components/BarChart', module)
                     ErrorComponent={null}
                     config={{
                         ...CUSTOM_COLOR_PALETTE_CONFIG,
-                        colorAssignment: [
+                        colorMapping: [
                             {
                                 predicate: (headerItem: Execution.IMeasureHeaderItem) =>
                                     headerItem.measureHeaderItem && (headerItem.measureHeaderItem.localIdentifier
@@ -389,7 +389,7 @@ storiesOf('Core components/BarChart', module)
                     ErrorComponent={null}
                     config={{
                         ...CUSTOM_COLOR_PALETTE_CONFIG,
-                        colorAssignment: [
+                        colorMapping: [
                             {
                                 predicate: getAttributeItemNamePredicate('Red'),
                                 color: {

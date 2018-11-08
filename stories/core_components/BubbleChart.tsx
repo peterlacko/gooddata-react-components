@@ -120,7 +120,7 @@ storiesOf('Core components/BubbleChart', module)
                     size={MEASURE_3}
                     viewBy={ATTRIBUTE_1}
                     config={{
-                        colorAssignment: [{
+                        colorMapping: [{
                             predicate: getAttributeItemNamePredicate('Pink'),
                             color: {
                                 type: 'rgb',

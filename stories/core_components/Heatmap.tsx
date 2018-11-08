@@ -345,7 +345,7 @@ storiesOf('Core components/Heatmap', module)
                     LoadingComponent={null}
                     ErrorComponent={null}
                     config={{
-                        colorAssignment: [
+                        colorMapping: [
                             {
                                 predicate: getMeasureLocalIdentifierPredicate('m1'),
                                 color: {

@@ -36,14 +36,14 @@ export type IColorItem = IGuidColorItem | IRGBColorItem;
 
 export type IMappingHeader = Execution.IResultAttributeHeaderItem | Execution.IMeasureHeaderItem;
 
-export type ColorAssignmentPredicate = (mappingHeader: IMappingHeader) => boolean;
+export type ColorMappingPredicate = (mappingHeader: IMappingHeader) => boolean;
 
-export interface IColorAssignment {
-    predicate: ColorAssignmentPredicate;
+export interface IColorMapping { // sent to SDK
+    predicate: ColorMappingPredicate;
     color: IColorItem;
 }
 
-export interface IColorMap {
+export interface IColorAssignment { // << send from SDK up
     headerItem: IMappingHeader;
     color: IColorItem;
 }
@@ -70,7 +70,7 @@ export interface IChartLimits {
 export interface IChartConfig {
     colors?: string[];
     colorPalette?: IColorPalette;
-    colorAssignment?: IColorAssignment[];
+    colorMapping?: IColorMapping[];
     type?: VisType;
     legend?: ILegendConfig;
     legendLayout?: string;

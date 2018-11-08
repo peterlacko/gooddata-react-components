@@ -123,7 +123,7 @@ storiesOf('Core components/Treemap', module)
                     viewBy={ATTRIBUTE_1}
                     config={{
                         ...CUSTOM_COLOR_PALETTE_CONFIG,
-                        colorAssignment: [
+                        colorMapping: [
                             {
                                 predicate: getAttributeItemNamePredicate('Red'),
                                 color: {

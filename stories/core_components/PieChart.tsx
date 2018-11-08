@@ -289,7 +289,7 @@ storiesOf('Core components/PieChart', module)
                     ErrorComponent={null}
                     config={{
                         ...CUSTOM_COLOR_PALETTE_CONFIG,
-                        colorAssignment: [
+                        colorMapping: [
                             {
                                 predicate: getAttributeItemNamePredicate('Red'),
                                 color: {
