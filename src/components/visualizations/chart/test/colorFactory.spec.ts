@@ -32,7 +32,7 @@ import range = require('lodash/range');
 function getColorsFromStrategy(strategy: IColorStrategy): string[] {
     const res: string[] = [];
 
-    for (let i = 0; i < strategy.getColorMapping().length; i++) {
+    for (let i = 0; i < strategy.getColorAssignment().length; i++) {
         res.push(strategy.getColorByIndex(i));
     }
 
@@ -595,7 +595,7 @@ describe('ColorFactory', () => {
             );
 
             expect(colorStrategy).toBeInstanceOf(BubbleChartColorStrategy);
-            expect(colorStrategy.getColorMapping().length).toEqual(1);
+            expect(colorStrategy.getColorAssignment().length).toEqual(1);
             expect(colorStrategy.getColorByIndex(0)).toEqual(expectedColors[0]);
         });
 
@@ -633,7 +633,7 @@ describe('ColorFactory', () => {
             );
 
             expect(colorStrategy).toBeInstanceOf(BubbleChartColorStrategy);
-            expect(colorStrategy.getColorMapping().length).toEqual(20);
+            expect(colorStrategy.getColorAssignment().length).toEqual(20);
             expect(colorStrategy.getColorByIndex(0)).toEqual(expectedColors[0]);
         });
     });
@@ -673,7 +673,7 @@ describe('ColorFactory', () => {
             );
 
             expect(colorStrategy).toBeInstanceOf(ScatterPlotColorStrategy);
-            expect(colorStrategy.getColorMapping().length).toEqual(1);
+            expect(colorStrategy.getColorAssignment().length).toEqual(1);
             range(6).map((itemIndex) => {
                 expect(colorStrategy.getColorByIndex(itemIndex)).toEqual(expectedColor);
             });

@@ -1448,7 +1448,7 @@ export function getChartOptions(
         series[0].data = sortedDataPoints;
     }
 
-    const colorMapping = colorStrategy.getColorMapping();
+    const colorMapping = colorStrategy.getColorAssignment();
     const { colorPalette } = config;
 
     if (isComboChart(type)) {

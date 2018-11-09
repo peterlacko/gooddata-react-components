@@ -1840,50 +1840,7 @@ const getBaseProjectSchema = (title, identifier) => {
                         displayForm: 'attr.closed.year.df',
                         alias: 'Date'
                     }]
-                }],
-                properties: '{\"controls\":{\"xaxis\":{\"min\":\"100\"}}}'
-            },
-            {
-                title: 'Chart with properties',
-                identifier: '1033',
-                type: 'local:bar',
-                filters: [],
-                buckets: [{
-                    localIdentifier: 'measures',
-                    items: [{
-                        localIdentifier: 'm1_pop',
-                        filters: [],
-                        identifier: '1',
-                        isDerived: true,
-                        measureIdentifier: 'm1',
-                        popAttribute: 'attr.closed.year'
-                    }, {
-                        localIdentifier: 'm1',
-                        filters: [],
-                        identifier: '1',
-                        alias: 'Amount'
-                    }, {
-                        localIdentifier: 'm2',
-                        filters: [],
-                        identifier: '2',
-                        alias: 'Value'
-                    }, {
-                        localIdentifier: 'm2_pop',
-                        filters: [],
-                        identifier: '2',
-                        isDerived: true,
-                        measureIdentifier: 'm2',
-                        popAttribute: 'attr.closed.year'
-                    }]
-                }, {
-                    localIdentifier: 'view',
-                    items: [{
-                        localIdentifier: 'a1',
-                        displayForm: 'attr.closed.year.df',
-                        alias: 'Date'
-                    }]
-                }],
-                properties: '{\"controls\":{\"xaxis\":{\"min\":\"100\"}}}'
+                }]
             },
             {
                 identifier: '1004',

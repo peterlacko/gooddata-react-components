@@ -280,8 +280,8 @@ export class VisualizationWrapped
             ? this.props.config.colorPalette
             : this.state.colorPalette;
 
-        let colorMapping = {};
-        if (properties.colorMapping) {
+        let colorMapping;
+        if (properties && properties.colorMapping) {
             const { references } = properties;
             colorMapping = properties.colorMapping.map((mapping: any) => {
                 const predicate = getUniversalPredicate(mapping.id, references);

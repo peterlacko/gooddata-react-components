@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { AFM, Execution } from '@gooddata/typings';
+import { AFM } from '@gooddata/typings';
 import { screenshotWrap } from '@gooddata/test-storybook';
 
 import { Visualization, IVisualizationProps } from '../../src/components/uri/Visualization';
@@ -175,60 +175,6 @@ storiesOf('URI components', module)
                     locale="en-US"
                     LoadingComponent={null}
                     ErrorComponent={null}
-                />
-            </div>
-        )
-    ))
-    .add('chart with PoP measures and properties', () => (
-        screenshotWrap(
-            <div style={{ width: 800, height: 400 }}>
-                <Visualization
-                    projectId="storybook"
-                    uri={'/gdc/md/storybook/obj/1003'}
-                    onError={onErrorHandler}
-                    locale="en-US"
-                    LoadingComponent={null}
-                    ErrorComponent={null}
-                    config={{
-                        xaxis: {
-                            max: '600'
-                        }
-                    }}
-                />
-            </div>
-        )
-    ))
-    .add('chart with PoP measures and color mapping', () => (
-        screenshotWrap(
-            <div style={{ width: 800, height: 400 }}>
-                <Visualization
-                    projectId="storybook"
-                    uri={'/gdc/md/storybook/obj/1003'}
-                    onError={onErrorHandler}
-                    locale="en-US"
-                    LoadingComponent={null}
-                    ErrorComponent={null}
-                    config={{
-                        colorMapping: [
-                            {
-                                predicate: (headerItem: Execution.IMeasureHeaderItem) =>
-                                    headerItem.measureHeaderItem && (headerItem.measureHeaderItem.localIdentifier
-                                        === 'm1'),
-                                color: {
-                                    type: 'guid',
-                                    value: 'purple'
-                                }
-                            }, {
-                                predicate: (headerItem: Execution.IMeasureHeaderItem) =>
-                                    headerItem.measureHeaderItem && (headerItem.measureHeaderItem.localIdentifier
-                                        === 'm3'),
-                                color: {
-                                    type: 'guid',
-                                    value: 'blue-dark'
-                                }
-                            }
-                        ]
-                    }}
                 />
             </div>
         )

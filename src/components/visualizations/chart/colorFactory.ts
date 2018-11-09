@@ -37,7 +37,7 @@ import {
 
 export interface IColorStrategy {
     getColorByIndex(index: number): string;
-    getColorMapping(): IColorAssignment[]; // TODO: rename to getColorAssignment
+    getColorAssignment(): IColorAssignment[];
 }
 
 function isGuidColorItem(color: IColorItem): color is IGuidColorItem {
@@ -82,7 +82,7 @@ export abstract class ColorStrategy implements IColorStrategy {
         return this.palette[index];
     }
 
-    public getColorMapping() {
+    public getColorAssignment() {
         return this.colorAssignment;
     }
 
@@ -121,7 +121,7 @@ function getColorFromMapping(mappingHeader: IMappingHeader, colorMapping: IColor
         return mapping && mapping.color;
 }
 
-export function getColorByGuid(colorPalette: any, guid: string) { // TODO: remove any
+export function getColorByGuid(colorPalette: IColorPalette, guid: string) {
     const inPalette = colorPalette.find((item: any) => item.guid === guid);
 
     return inPalette ? inPalette.fill : null;

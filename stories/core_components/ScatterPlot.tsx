@@ -133,7 +133,6 @@ storiesOf('Core components/ScatterPlot', module)
             <div style={wrapperStyle}>
                 <ScatterPlot
                     projectId="storybook"
-                    // xAxisMeasure={MEASURE_1}
                     yAxisMeasure={MEASURE_2}
                     attribute={ATTRIBUTE_1}
                     onError={onErrorHandler}
