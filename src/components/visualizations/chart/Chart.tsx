@@ -2,13 +2,8 @@
 import isEqual = require('lodash/isEqual');
 import noop = require('lodash/noop');
 import * as React from 'react';
-// import { VisualizationObject, Execution } from '@gooddata/typings';
 import { initChartPlugins } from './highcharts/chartPlugins';
 import { IChartConfig } from '../../../interfaces/Config';
-// import { VisType } from '../../../constants/visualizationTypes';
-// import { IDataLabelsConfig } from '../../../interfaces/Config';
-// import { ISeparators } from '@gooddata/numberjs';
-// import { PositionType } from '../typings/legend';
 
 // Have only one entrypoint to highcharts and drill module
 // tslint:disable-next-line

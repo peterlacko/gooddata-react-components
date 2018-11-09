@@ -7,7 +7,7 @@ import getLegend, {
     getLegendItems
 } from '../legendBuilder';
 import { DEFAULT_LEGEND_CONFIG } from '../../../typings/legend';
-import { VisualizationTypes } from '../../../../..';
+import { VisualizationTypes } from '../../../../../constants/visualizationTypes';
 
 describe('shouldLegendBeEnabled', () => {
     it('should return false by default', () => {

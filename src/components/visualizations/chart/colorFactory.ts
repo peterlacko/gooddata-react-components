@@ -40,6 +40,10 @@ export interface IColorStrategy {
     getColorMapping(): IColorAssignment[]; // TODO: rename to getColorAssignment
 }
 
+function isGuidColorItem(color: IColorItem): color is IGuidColorItem {
+    return (color as IGuidColorItem).type === 'guid';
+}
+
 export type HighChartColorPalette = string[];
 export type MeasureGroupType = Execution.IMeasureGroupHeader['measureGroupHeader'];
 export const attributeChartSupportedTypes = [
@@ -89,8 +93,8 @@ export abstract class ColorStrategy implements IColorStrategy {
             _stackByAttribute: any):
         string[] {
         return colorAssignment.map((map) => {
-            const color = map.color.type === 'guid'
-                ? getColorByGuid(colorPalette, map.color.value as string) : map.color.value as IRGBColor;
+            const color = isGuidColorItem(map.color)
+                ? getColorByGuid(colorPalette, map.color.value) : map.color.value;
             return getRgbStringFromRGB(color);
         });
     }
@@ -205,9 +209,9 @@ export class MeasureColorStrategy extends ColorStrategy {
             const parentMeasureIndex = findParentMeasureIndex(afm, measureItemIndex);
             if (parentMeasureIndex > -1) {
                 const sourceMeasureColor = measuresColorAssignment[parentMeasureIndex].color;
-                const rgbColor = sourceMeasureColor.type === 'guid'
-                    ? getColorByGuid(colorPalette, sourceMeasureColor.value as string)
-                    : sourceMeasureColor.value as IRGBColor;
+                const rgbColor = isGuidColorItem(sourceMeasureColor)
+                    ? getColorByGuid(colorPalette, sourceMeasureColor.value)
+                    : sourceMeasureColor.value;
                 return {
                     ...mapItem,
                     color: {
@@ -309,7 +313,7 @@ export class HeatmapColorStrategy extends ColorStrategy {
         colorPalette: IColorPalette,
         colorAssignment: IColorAssignment[]
     ): string[] {
-        if (colorAssignment[0].color.type === 'guid') {
+        if (isGuidColorItem(colorAssignment[0].color)) {
             if (colorAssignment[0].color.value === 'HEATMAP_DEFAULT') {
                 return HEATMAP_BLUE_COLOR_PALETTE;
             }
@@ -391,9 +395,9 @@ export class PointsChartColorStrategy extends AttributeColorStrategy {
             colorPalette: IColorPalette, colorAssignment: IColorAssignment[], viewByAttribute: any
         ): string[] {
         const length = viewByAttribute ? viewByAttribute.items.length : 1;
-        const color = colorAssignment[0].color.type === 'guid'
+        const color = isGuidColorItem(colorAssignment[0].color)
             ? getColorByGuid(colorPalette, colorAssignment[0].color.value as string)
-            : colorAssignment[0].color.value as IRGBColor;
+            : colorAssignment[0].color.value;
         const colorString = getRgbStringFromRGB(color);
         return Array(length).fill(colorString);
     }

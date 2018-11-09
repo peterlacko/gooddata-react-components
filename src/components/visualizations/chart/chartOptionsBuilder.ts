@@ -2,6 +2,7 @@
 import { colors2Object, numberFormat } from '@gooddata/numberjs';
 import * as invariant from 'invariant';
 import { AFM, Execution, VisualizationObject } from '@gooddata/typings';
+import { IColorPalette } from '@gooddata/gooddata-js';
 import * as Highcharts from 'highcharts';
 
 import cloneDeep = require('lodash/cloneDeep');
@@ -56,7 +57,6 @@ import { IDrillableItem } from '../../../interfaces/DrillEvents';
 
 import { ColorFactory, IColorStrategy } from './colorFactory';
 import { IColorAssignment, IChartLimits, IChartConfig } from '../../../interfaces/Config';
-import { IColorPalette } from '@gooddata/gooddata-js';
 
 const enableAreaChartStacking = (stacking: any) => {
     return stacking || isUndefined(stacking);

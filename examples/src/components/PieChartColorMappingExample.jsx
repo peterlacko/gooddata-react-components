@@ -12,15 +12,15 @@ import {
 } from '../utils/fixtures';
 
 
-export class PieChartExample extends Component {
+export class PieChartColorMappingExample extends Component {
     onLoadingChanged(...params) {
         // eslint-disable-next-line no-console
-        return console.log('PieChartExample onLoadingChanged', ...params);
+        return console.log('PieChartColorMappingExample onLoadingChanged', ...params);
     }
 
     onError(...params) {
         // eslint-disable-next-line no-console
-        return console.log('PieChartExample onError', ...params);
+        return console.log('PieChartColorMappingExample onError', ...params);
     }
 
     render() {
@@ -98,4 +98,4 @@ export class PieChartExample extends Component {
     }
 }
 
-export default PieChartExample;
+export default PieChartColorMappingExample;

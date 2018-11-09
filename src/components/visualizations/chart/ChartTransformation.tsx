@@ -21,7 +21,6 @@ import HighChartsRenderer, {
 import { OnFiredDrillEvent, OnLegendReady } from '../../../interfaces/Events';
 import { IDrillableItem } from '../../../interfaces/DrillEvents';
 import { IChartConfig } from '../../../interfaces/Config';
-// import { IPushData } from '../../../../src/interfaces/PushData';
 
 export function renderHighCharts(props: IHighChartsRendererProps) {
     return <HighChartsRenderer {...props} />;
